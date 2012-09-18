@@ -9,5 +9,5 @@ Feature: In order to track orders
   Scenario: Ticket creation
     Given I start a new ticket
       And I fill in the ticket details
-    When  I press "Save"
+    When  I save the ticket
     Then  I should see the ticket on the tickets page
