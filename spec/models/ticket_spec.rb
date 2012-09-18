@@ -1,5 +1,12 @@
 require 'spec_helper'
 
 describe Ticket do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe "#to_s" do
+    it "should be the table number" do
+      ticket = create(:ticket, table_number: 20)
+
+      ticket.to_s.should == "Table 20"
+    end
+  end
 end

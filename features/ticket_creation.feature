@@ -1,6 +1,6 @@
-Feature: In order to track orders
-  As a cafe staff member
-  I want to create tickets for tables
+Feature:
+  In order to track orders
+  Yong wants to create tickets for tables
 
   Background:
     Given the staff member "Yong"
