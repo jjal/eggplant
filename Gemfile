@@ -16,6 +16,7 @@ group :development, :test do
   gem 'guard-rspec', '0.5.5'
  # gem 'guard-spork', '0.3.2'
   gem 'spork', '0.9.0'
+  gem 'cucumber-rails', '1.3.0', :require => false
   gem 'win32console', platform: :mswin
 end
 
@@ -30,7 +31,6 @@ group :test do
   gem 'rb-notifu', '0.0.4'
   gem 'win32console', platform: :mswin
 	gem 'factory_girl_rails', '1.4.0'
-	gem 'cucumber-rails', '1.2.1', :require => false
   gem 'database_cleaner', '0.7.0'
 end 
 
