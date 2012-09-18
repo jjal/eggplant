@@ -27,8 +27,8 @@ gem 'annotate', '2.5.0', group: :development
 # Test gems on Windows
 group :test do
   gem 'capybara', '1.1.2'
-  gem 'rb-fchange', '0.0.5'
-  gem 'rb-notifu', '0.0.4'
+  gem 'rb-fchange', '0.0.5', platform: :mswin
+  gem 'rb-notifu', '0.0.4', platform: :mswin
   gem 'win32console', platform: :mswin
 	gem 'factory_girl_rails', '1.4.0'
   gem 'database_cleaner', '0.7.0'
