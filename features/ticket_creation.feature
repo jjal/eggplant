@@ -7,8 +7,7 @@ Feature: In order to track orders
       And I am logged in as "Yong"
 
   Scenario: Ticket creation
-    Given I am on the tickets page
-      And I follow "New Ticket"
+    Given I start a new ticket
       And I fill in the ticket details
     When  I press "Save"
     Then  I should see the ticket on the tickets page
