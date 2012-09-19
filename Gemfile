@@ -37,6 +37,7 @@ group :test do
 	gem 'factory_girl_rails', '1.4.0'
   gem 'database_cleaner', '0.7.0'
   gem 'faker', '1.0.1'
+  gem 'shoulda'
 end 
 
 group :production do

@@ -4,8 +4,8 @@ class OrderItem < ActiveRecord::Base
 
   attr_accessible :menu_item_id, :ticket_id
 
-  validate :menu_item, presence: true
-  validate :ticket, presence: true
+  validates :menu_item,  presence: true
+  validates :ticket,     presence: true
 
   def to_s
     menu_item

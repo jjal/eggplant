@@ -4,6 +4,12 @@ FactoryGirl.define do
     name "Banana Bread"
   end
 
+  factory :order_item do
+    menu_item
+    ticket
+  end
+
+
   factory :ticket do
     table_number 22
     name          "Melina"

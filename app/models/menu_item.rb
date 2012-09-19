@@ -1,7 +1,7 @@
 class MenuItem < ActiveRecord::Base
   attr_accessible :name
 
-  validate :name, presence: true
+  validates :name, presence: true
 
   def to_s
     name
