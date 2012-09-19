@@ -3,11 +3,11 @@ Feature:
   Yong wants to create tickets for tables
 
   Background:
-    Given the staff member "Yong"
-      And I am logged in as "Yong"
+    Given I am logged in as "Yong"
+      And there is a ticket for table 2
+      And "Banana Bread" and "Cafe Latte" are on the menu
 
-  Scenario: Ticket creation
-    Given I start a new ticket
-      And I fill in the ticket details
-    When  I save the ticket
-    Then  I should see the ticket on the tickets page
+  Scenario: Adding an order to a ticket
+    Given I open the ticket for table 2
+      And I add "Banana Bread" and "Cafe Latte"
+    Then  I should see "Banana Bread" and "Cafe Latte" on the ticket

@@ -17,3 +17,12 @@ Then /^I should see the ticket on the tickets page$/ do
     page.should have_content('Table 1')
   end
 end
+
+Given /^there is a ticket for table (\d+)$/ do |table_number|
+  create(:ticket, table_number: table_number)
+end
+
+Given /^I open the ticket for table (\d+)$/ do |table_number|
+  visit tickets_path
+  click_link "Table #{table_number}"
+end
