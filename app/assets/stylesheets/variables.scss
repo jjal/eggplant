@@ -1,0 +1,12 @@
+$bodyBackground:                    darken(white, 2%);
+$containerWidth:                    1140px;
+
+$btnPrimaryBackground:              #22c9f3;
+$btnPrimaryBackgroundHighlight:     adjust-hue($btnPrimaryBackground, 8%);
+
+$sansFontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$serifFontFamily: Georgia, "Times New Roman", Times, serif !default;
+
+$blue: #00C0EC;
+$lightGrey: darken(white, 40%);
+$keylineColour: darken(white, 8%);
