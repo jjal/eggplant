@@ -1,3 +1,5 @@
 Eggplant::Application.routes.draw do
-  resources :tickets
+  resources :tickets do
+    resources :order_items
+  end
 end

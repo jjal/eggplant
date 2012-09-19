@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
   respond_to :html
 
-  expose(:tickets) { Ticket.all }
+  expose(:tickets)
   expose(:ticket)
 
   def create

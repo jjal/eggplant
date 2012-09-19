@@ -1,0 +1,5 @@
+
+%ol
+  - menu_items.each do |menu_item|
+    %li
+      = link_to menu_item, ticket_order_items_path(order_item: { menu_item_id: menu_item.id }), method: :post

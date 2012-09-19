@@ -5,7 +5,7 @@ gem 'rails', '3.2.8'
 
 gem 'bcrypt-ruby',              '3.0.1'
 gem 'bootstrap-will_paginate',  '0.0.6'
-gem 'decent_exposure',          '1.0.1'
+gem 'decent_exposure',          '2.0.0.rc1'
 gem 'formtastic'
 gem 'haml',                     '~> 3.2.0.alpha.10'
 gem 'will_paginate',            '3.0.3'
