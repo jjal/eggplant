@@ -3,4 +3,4 @@
 %ul#tickets
   - tickets.each do |ticket|
     %li
-      = ticket
+      = link_to ticket, ticket

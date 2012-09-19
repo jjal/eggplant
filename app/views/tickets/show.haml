@@ -1,0 +1,6 @@
+%h1= ticket
+
+- ticket.order_items.each do |order_item|
+  = order_item
+
+= link_to "Add Item", [:new, :order_item]
