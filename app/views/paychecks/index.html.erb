@@ -1,0 +1,24 @@
+<% provide(:title, "Pay checks for pay period \#{@startDate} to \#{@endDate}") %>
+<h1>Check Hours - pay period <%=@startDate%> to <%=@endDate%></h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>Employee</th>
+    <th>Recorded Hours</th>
+    <th>Paycheck Status</th>
+    <th></th>
+  </tr>
+
+<% @employees.each do |employee| %>
+  <tr>
+    <td><%= employee.name %></td>
+    <td><%= employee.get_worked_shift_total @startDate, @endDate %></td>
+    <td><%= employee.current_paycheck(@startDate, @endDate).try(:status) %></td>
+    <td><%= link_to "Edit hours", "" %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to "New Paycheck", new_paycheck_path %>

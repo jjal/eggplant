@@ -4,8 +4,11 @@ Eggplant::Application.routes.draw do
   end
   
   resources :pay_rates
+  resources :paychecks
   
-  resources :employees 
+  resources :employees  do
+    resources :worked_shifts
+  end
   
   root to: 'employees#index'
 end

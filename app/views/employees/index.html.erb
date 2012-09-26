@@ -5,6 +5,8 @@
   <%= render @employees %>
 </ul>
 <%= will_paginate %>
-<br />
+<%= link_to "New employee", new_employee_path %>
+<br /><br/>
 
-<%= link_to 'New employee', new_employee_path %>
+<%= button_to "Next", paychecks_url %>
+
