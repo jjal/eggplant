@@ -2,6 +2,10 @@ Eggplant::Application.routes.draw do
   resources :tickets do
     resources :order_items
   end
-
-  root to: 'tickets#index'
+  
+  resources :employees do
+    resources :worked_shifts
+  end
+  
+  root to: 'employees#index'
 end

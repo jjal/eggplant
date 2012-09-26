@@ -1,0 +1,13 @@
+<% provide(:title, @employee.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @employee.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>
