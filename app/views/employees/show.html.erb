@@ -5,6 +5,7 @@
       <h1>
         <%= @employee.name %>
       </h1>
+      <%= @employee.pay_rate.try(:name) %>
     </section>
   </aside>
 </div>

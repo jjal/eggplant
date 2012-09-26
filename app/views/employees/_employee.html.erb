@@ -1,4 +1,5 @@
 <li>
-  <%= link_to employee.name, employee %>
-  <%= link_to "edit", employee, method: :edit %>
+  <%= link_to employee.name, employee_path(employee) %>
+  <%= employee.pay_rate.try(:name) %>
+  <%= link_to "Edit", edit_employee_path(employee) %>
 </li>

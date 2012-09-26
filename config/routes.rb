@@ -3,9 +3,9 @@ Eggplant::Application.routes.draw do
     resources :order_items
   end
   
-  resources :employees do
-    resources :worked_shifts
-  end
+  resources :pay_rates
+  
+  resources :employees 
   
   root to: 'employees#index'
 end

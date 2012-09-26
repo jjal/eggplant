@@ -1,0 +1,24 @@
+<% provide(:title, "Pay Rates") %>
+<h1>Pay Rates</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Hourly Rate</th>
+    <th>Monthly Rate</th>
+    <th>FTE</th>
+  </tr>
+
+<% @pay_rates.each do |pay_rate| %>
+  <tr>
+    <td><%= pay_rate.name %></td>
+    <td><%= pay_rate.type %></td>
+    <td><%= pay_rate.hourly_rate %></td>
+    <td><%= pay_rate.monthly_rate %></td>
+    <td><%= pay_rate.FTE %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

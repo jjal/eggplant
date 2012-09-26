@@ -1,0 +1,2 @@
+class CasualPayRate < PayRate
+end

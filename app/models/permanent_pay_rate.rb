@@ -1,0 +1,2 @@
+class PermanentPayRate < PayRate
+end
