@@ -14,7 +14,7 @@
     <td><%= employee.name %></td>
     <td><%= employee.get_worked_shift_total @startDate, @endDate %></td>
     <td><%= employee.current_paycheck(@startDate, @endDate).try(:status) %></td>
-    <td><%= link_to "Edit hours", "" %>
+    <td><%= link_to "Edit hours", employee_worked_shifts_url(employee) %>
   </tr>
 <% end %>
 </table>

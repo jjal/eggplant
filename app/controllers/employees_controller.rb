@@ -40,4 +40,8 @@ class EmployeesController < ApplicationController
     flash[:success] = "employee destroyed."
     redirect_to employees_url
   end
+  
+  def paycheck_shifts
+    @employee = Employee.find(params[:id])
+  end
 end
