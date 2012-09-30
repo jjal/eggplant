@@ -1,0 +1,42 @@
+<% provide(:title, "Shifts for "+@employee.name) %>
+<h1>Shifts for <%=@employee.name%></h1>
+<div class="control-group inline"> 
+<%= form_tag({:controller => "worked_shifts", :action => "shifts"}, {:method => "get", :class => "form-horizontal"}) do %>
+<table class="table-striped">
+<th style="width:40px"></th>
+<th style="width:40px"></th>
+<th style="width:100px"></th>
+<th>Start</th>
+<th>Stop</th>
+<th>Hours</th>
+<tbody>
+  <% current_pay_period.first.upto(current_pay_period.last).each do |d|%>
+    <tr> 
+    <td><%= d.strftime("%a") %></td>
+    <td><%= d.strftime("%d") %></td>
+    <td><%= d.strftime("%b") %></td>
+    <td><div style="display:inline-block;width:50px"><%= text_field_tag "start_time"+d.strftime("%d"), nil, maxlength: 5, width: "10px", onchange: "update("+d.strftime("%d")+")" %></div></td>
+    <td><div style="display:inline-block;width:50px"><%= text_field_tag  "end_time"+d.strftime("%d"), nil, maxlength: 5, width: "10px", onchange: "update("+d.strftime("%d")+")"  %></div></td>
+    <td><div id="hours<%=d.strftime("%d")%>" style="padding:10px"></div></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+</div>
+<script>
+  function update(id)
+  {
+    $("#hours"+id).text(Date());
+    var start = toDate($("#start_time"+id).val());
+    var end = toDate($("#end_time"+id).val());
+    if(start.getTime && end.getTime)
+    {
+      var diff = get_time_difference(start, end);
+       
+      $("#hours"+id).text(diff.hours+":"+diff.minutes);
+    }
+    else
+    $("#hours"+id).text("##");
+  }
+</script>

@@ -86,8 +86,8 @@ class PaychecksController < ApplicationController
   private
     #make sure we have all the paychecks for the current period
     def ensure_paychecks_for_period
-      @startDate = get_start_date_for(Time.now)
-      @endDate = get_end_date_for(Time.now)
+      @startDate = get_start_date_for(DateTime.now)
+      @endDate = get_end_date_for(DateTime.now)
       @employees = Employee.all
       @employees.each do |e|
         if(e.paychecks.find(:all, conditions: { start_at: @startDate, end_at: @endDate }).size == 0)

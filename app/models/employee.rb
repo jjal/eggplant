@@ -13,8 +13,4 @@ class Employee < ActiveRecord::Base
     self.paychecks.find(:first, conditions: { start_at: start_date..end_date })
   end
   
-  def get_current_worked_shifts
-    self.paychecks.find(:first, 
-      conditions: { start_at: get_start_date_for(Time.now)..get_end_date_for(Time.now) })
-  end
 end

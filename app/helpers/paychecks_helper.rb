@@ -1,6 +1,5 @@
 module PaychecksHelper
   def get_end_date_for(t)
-    t = t.change(hour:0, min:0, sec:0, usec:0)
     if(t.day <= 14)
       t = t.change(day: 14)
     else
@@ -17,4 +16,8 @@ module PaychecksHelper
     end
     t
   end
+  
+  def current_pay_period
+    get_start_date_for(DateTime.now)..get_end_date_for(DateTime.now)
+  end 
 end
