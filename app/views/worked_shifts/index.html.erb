@@ -15,8 +15,8 @@
     <td><%= d.strftime("%a") %></td>
     <td><%= d.strftime("%d") %></td>
     <td><%= d.strftime("%b") %></td>
-    <td><div style="display:inline-block;width:50px"><%= text_field_tag "start_time"+d.strftime("%d"), nil, maxlength: 5, width: "10px", onchange: "update("+d.strftime("%d")+")" %></div></td>
-    <td><div style="display:inline-block;width:50px"><%= text_field_tag  "end_time"+d.strftime("%d"), nil, maxlength: 5, width: "10px", onchange: "update("+d.strftime("%d")+")"  %></div></td>
+    <td><div style="display:inline-block;width:50px"><%= text_field_tag "start_time"+d.strftime("%d"), nil, maxlength: 5, width: "10px", onchange: "update('"+d.strftime("%d")+"')" %></div></td>
+    <td><div style="display:inline-block;width:50px"><%= text_field_tag  "end_time"+d.strftime("%d"), nil, maxlength: 5, width: "10px", onchange: "update('"+d.strftime("%d")+"')"  %></div></td>
     <td><div id="hours<%=d.strftime("%d")%>" style="padding:10px"></div></td>
     </tr>
   <% end %>

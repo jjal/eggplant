@@ -1,5 +1,5 @@
-<% provide(:title, "Pay checks for pay period \#{@startDate} to \#{@endDate}") %>
-<h1>Check Hours - pay period <%=@startDate%> to <%=@endDate%></h1>
+<% provide(:title, "Pay checks for pay period "+@startDate.strftime("%d/%m/%y")+" to "+@endDate.strftime("%d/%m/%y")) %>
+<h1>Check hours - pay period <%=@startDate.strftime("%d/%m/%y")+" to "+@endDate.strftime("%d/%m/%y")%></h1>
 
 <table class="table table-striped">
   <tr>
