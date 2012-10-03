@@ -5,7 +5,6 @@
   <%= render @employees %>
 </ul>
 <%= will_paginate %>
-<%= link_to "New employee", new_employee_path %>
-<br /><br/>
+<br />
 
-<%= button_to "Next", paychecks_path, method: :get %>
+<%= button_to "Worked Hours", paychecks_path, method: :get, class: "btn btn-large btn-primary" %>

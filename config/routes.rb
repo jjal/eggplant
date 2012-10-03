@@ -5,10 +5,13 @@ Eggplant::Application.routes.draw do
   
   resources :pay_rates
   resources :paychecks
+  resources :leaves
   
   resources :employees do
     resources :worked_shifts do
       get 'shifts', :on => :collection
+    end
+    resources :leaves do
     end
   end
   
