@@ -13,6 +13,8 @@ Eggplant::Application.routes.draw do
     end
     resources :leaves do
     end
+    resources :adjustments do
+    end
   end
   
   root to: 'employees#index'
