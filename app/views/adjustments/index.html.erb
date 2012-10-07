@@ -13,7 +13,7 @@
 <% @employees.each do |employee| %>
   <tr>
     <td><%=employee.name%></td>
-    <td><%=count_hours employee.leaves%></td>
+    <td><%=count_hours employee.adjustments %></td>
     <td><%= button_to "Edit hours", employee_leaves_url(employee), method: :get, class: "btn btn-small" %></td>
     <td></td>
   </tr>

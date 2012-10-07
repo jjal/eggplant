@@ -1,26 +1,22 @@
-<% provide(:title, "Leave hours for pay period "+current_pay_period.first.strftime("%d %b %Y")+" to "+current_pay_period.last.strftime("%d %b %Y")) %>
-<h1><%= @employee.name %>'s leave <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
+<% provide(:title, "Adjustments for pay period "+current_pay_period.first.strftime("%d %b %Y")+" to "+current_pay_period.last.strftime("%d %b %Y")) %>
+<h1><%= @employee.name %>'s adjustments <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
 
 
 <table class="table table-striped">
   <tr>
-    <th>Start</th>
-    <th>End</th>
-    <th>Hours</th>
+    <th>Amount</th>
     <th></th>
   </tr>
 
-<% @employee.leaves.each do |leave| %>
+<% @employee.adjustments.each do |adjustment| %>
   <tr>
-    <td><%=leave.start_at%></td>
-    <td><%=leave.end_at%></td>
-    <td><%=leave.end_at - leave.start_at%></td>
-    <td><%= button_to "Delete", leave, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-small" %></td>
+    <td><%=adjustment.amount%></td>
+    <td><%= button_to "Delete", adjustment, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-small" %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= button_to "New Leave", new_employee_leafe_url(@employee), method: :get, class: "btn btn-large btn-primary" %>
-<%= button_to "Back to leave summary", leaves_path, method: :get, class: "btn btn-large" %>
+<%= button_to "New adjustment", new_employee_adjustment_url(@employee), method: :get, class: "btn btn-large btn-primary" %>
+<%= button_to "Back to adjustment summary", adjustments_path, method: :get, class: "btn btn-large" %>
