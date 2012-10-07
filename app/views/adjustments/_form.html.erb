@@ -1,17 +1,17 @@
-<%= form_for([@employee, @adjustment]) do |f| %>
-  <% if @leave.errors.any? %>
+<%= form_for([@paycheck, @adjustment]) do |f| %>
+  <% if @adjustment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@leave.errors.count, "error") %> prohibited this adjustment from being saved:</h2>
 
       <ul>
-      <% @leave.errors.full_messages.each do |msg| %>
+      <% @adjustment.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-  <%= f.label :amount %>
-  <%= f.text_field :amount %>
+  <%= f.label :pay %>
+  <%= f.text_field :pay %>
 
   <div class="actions">
     <%= f.submit class: "btn btn-large btn-primary"%>

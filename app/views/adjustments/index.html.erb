@@ -1,26 +1,28 @@
-<% provide(:title, "Leave hours for pay period "+current_pay_period.first.strftime("%d %b %Y")+" to "+current_pay_period.last.strftime("%d %b %Y")) %>
-<h1>Leave hours <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
+<% provide(:title, "Adjustments for pay period "+current_pay_period.first.strftime("%d %b %Y")+" to "+current_pay_period.last.strftime("%d %b %Y")) %>
+<h1>Adjustments <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
 
 
 <table class="table table-striped">
   <tr>
     <th>Employee</th>
-    <th>Hours</th>
+    <th>Total Adjustments</th>
     <th></th>
     <th></th>
   </tr>
 
-<% @employees.each do |employee| %>
+<% @employees.each do |employee| 
+      paycheck = employee.current_paycheck
+%>
   <tr>
     <td><%=employee.name%></td>
-    <td><%=count_hours employee.adjustments %></td>
-    <td><%= button_to "Edit hours", employee_leaves_url(employee), method: :get, class: "btn btn-small" %></td>
+    <td><%=paycheck.adjustments.sum(:pay) %></td>
+    <td><%= button_to "Edit ", paycheck_adjustments_url(paycheck), method: :get, class: "btn btn-small" %></td>
     <td></td>
   </tr>
 <% end %>
 </table>
-<%= button_to "Back to worked hours", paychecks_path, method: :get, class: "btn btn-large" %>
-<%= button_to "Adjustments", "", class: "btn btn-large btn-primary"%>
+<%= button_to "Back to leave hours", leaves_path, method: :get, class: "btn btn-large" %>
+<%= button_to "Pay Slips", paychecks_path, class: "btn btn-large btn-primary", method: :get%>
 <br />
 
 

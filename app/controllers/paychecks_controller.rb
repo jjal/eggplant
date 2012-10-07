@@ -6,10 +6,8 @@ class PaychecksController < ApplicationController
   # GET /paychecks
   # GET /paychecks.json
   def index  
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @paychecks }
-    end
+    @employees = Employee.all
+    
   end
 
   # GET /paychecks/1

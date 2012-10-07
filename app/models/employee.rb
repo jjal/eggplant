@@ -10,8 +10,16 @@ class Employee < ActiveRecord::Base
     self.worked_shifts.sum('end_at - start_at', conditions: { start_at: start_date..end_date } )
   end
   
-  def current_paycheck(start_date, end_date)
-    self.paychecks.find(:first, conditions: { start_at: start_date..end_date })
+  def current_paycheck(*args)
+    start_date = args[0] || current_pay_period.first
+    end_date = args[1] || current_pay_period.last
+    
+    paycheck = self.paychecks.find(:first, conditions: { start_at: start_date..end_date })
+    if(paycheck.nil?)
+      paycheck = self.paychecks.build(start_at: start_date, end_at: end_date)
+      paycheck.save!
+    end
+    return paycheck
   end
   
 end

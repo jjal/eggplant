@@ -1,0 +1,66 @@
+<% provide(:title, "Shifts for "+@employee.name) %>
+<h1>Shifts for <%=@employee.name%> <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
+<div class="control-group inline"> 
+<%= form_tag({:controller => "worked_shifts", :action => "shifts"}, {:method => "get", :class => "form-horizontal"}) do %>
+<table class="table table-striped" style="width:0%">
+<th style="width:35px"></th>
+<th style="width:20px"></th>
+<th style="width:50px"></th>
+<th>Start</th>
+<th>Stop</th>
+<th>Hours</th>
+<tbody>
+  <% current_pay_period.first.upto(current_pay_period.last).each do |d|
+      shift = @employee.worked_shifts.find(:first, conditions: {start_at: get_date_for_day(d.day)..get_date_for_day(d.day+1), end_at: get_date_for_day(d.day)..get_date_for_day(d.day+1)})
+      if(!shift.nil?)
+        start_at = shift.start_at.strftime("h:m")
+        end_at = shift.end_at.strftime("h:m")
+      end %>
+    <tr> 
+    <td><%= d.strftime("%a") %></td>
+    <td><%= d.strftime("%d") %></td>
+    <td><%= d.strftime("%b") %></td>
+    <td><div style="display:inline-block;width:50px"><%= text_field_tag "start_times[#{d.strftime('%d')}]", start_at, maxlength: 5, width: "10px", onchange: "update('#{d.strftime('%d')}')" %></div></td>
+    <td><div style="display:inline-block;width:50px"><%= text_field_tag  "end_times[#{d.strftime('%d')}]", end_at, maxlength: 5, width: "10px", onchange: "update('#{d.strftime('%d')}')"  %></div></td>
+    <td><div id="hours<%=d.strftime("%d")%>" style="padding:10px">&nbsp;</div></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= submit_tag "Save", class: "btn btn-large btn-primary"%>
+
+<h2>Total: <span id="total"></span></h2>
+<% end %>
+</div>
+<%= button_to "Back to Worked Shifts", worked_shifts_path, method: :get, class: "btn btn-large"%>
+
+<script>
+  function update(id)
+  {
+    var start = toDate($("#start_times_"+id).val());
+    var end = toDate($("#end_times_"+id).val());
+    if(start.getTime && end.getTime)
+    {
+      var diff = get_time_difference(start, end);
+       
+      $("#hours"+id).text(diff.hours+":"+diff.minutes);
+    }
+    else
+      $("#hours"+id).text("##");
+    updateTotal();
+  }
+  function updateTotal()
+  {
+    var hrs = 0;
+    var mins = 0;
+    $("[id^=hours]").each(function () {
+      var t = toDate($(this).text());
+      if(t)
+      {
+        hrs += t.getHours();
+        mins += t.getMinutes();
+      }
+    });
+   $("#total").text((((hrs*60)+mins)/60).toFixed(2) + " hours");
+  }
+</script>

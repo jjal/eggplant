@@ -2,11 +2,11 @@ class AdjustmentsController < ApplicationController
   # GET /adjustments
   # GET /adjustments.json
   def index
-    if(params[:employee_id].nil?)
-      @employees = Employee.all
+    if(!params[:paycheck_id].nil?)
+      @paycheck = Paycheck.find(params[:paycheck_id])
+      render 'paycheck_index'
     else
-      @employee = Employee.find(params[:employee_id])
-      render 'employee_index'
+      @employees = Employee.all
     end
   end
 
@@ -20,8 +20,8 @@ class AdjustmentsController < ApplicationController
   # GET /adjustments/new
   # GET /adjustments/new.json
   def new
-    @employee = Employee.find(params[:employee_id])
-    @adjustment = @employee.adjustments.build
+    @paycheck = Paycheck.find(params[:paycheck_id])
+    @adjustment = @paycheck.adjustments.build
   end
 
   # GET /adjustments/1/edit
@@ -32,14 +32,14 @@ class AdjustmentsController < ApplicationController
   # POST /adjustments
   # POST /adjustments.json
   def create
-    @employee = Employee.find(params[:employee_id])
-    @adjustment = @employee.adjustments.build(params[:adjustment])
+    @paycheck = Paycheck.find(params[:paycheck_id])
+    @adjustment = @paycheck.adjustments.build(params[:adjustment])
     
     respond_to do |format|
       if @adjustment.save
-        format.html { redirect_to employee_adjustments_path(@employee), notice: 'adjustment was successfully created.' }
+        format.html { redirect_to paycheck_adjustments_path(@paycheck), notice: 'adjustment was successfully created.' }
       else
-        format.html { render action: "new" }        
+        format.html { render action: "new" }
       end
     end
   end

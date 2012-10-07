@@ -1,16 +1,18 @@
 <% provide(:title, "Adjustments for pay period "+current_pay_period.first.strftime("%d %b %Y")+" to "+current_pay_period.last.strftime("%d %b %Y")) %>
-<h1><%= @employee.name %>'s adjustments <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
+<h1><%= @paycheck.employee.name %>'s adjustments <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
 
 
 <table class="table table-striped">
   <tr>
+    <th>Added</th>
     <th>Amount</th>
     <th></th>
   </tr>
 
-<% @employee.adjustments.each do |adjustment| %>
+<% @paycheck.adjustments.each do |adjustment| %>
   <tr>
-    <td><%=adjustment.amount%></td>
+    <td><%=adjustment.created_at%></td>
+    <td><%=adjustment.pay%></td>
     <td><%= button_to "Delete", adjustment, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-small" %></td>
   </tr>
 <% end %>
@@ -18,5 +20,5 @@
 
 <br />
 
-<%= button_to "New adjustment", new_employee_adjustment_url(@employee), method: :get, class: "btn btn-large btn-primary" %>
+<%= button_to "New adjustment", new_paycheck_adjustment_url(@paycheck), method: :get, class: "btn btn-large btn-primary" %>
 <%= button_to "Back to adjustment summary", adjustments_path, method: :get, class: "btn btn-large" %>

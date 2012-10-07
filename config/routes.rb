@@ -5,10 +5,12 @@ Eggplant::Application.routes.draw do
   
   resources :pay_rates
   resources :paychecks do
-    
+    resources :adjustments do
+      end
   end
   resources :leaves
   resources :adjustments
+  resources :worked_shifts
   
   resources :employees do
     resources :worked_shifts do
@@ -17,8 +19,7 @@ Eggplant::Application.routes.draw do
     resources :leaves do
     end
     resources :paychecks do
-      resources :adjustments do
-      end
+      
     end
   end
   

@@ -1,0 +1,14 @@
+<li>
+  <div class=""><%= paycheck.start_at.strftime("%d %b %Y") %> - <%= paycheck.end_at.strftime("%d %b %Y") %></div>
+  <div class=""><%= paycheck.employee.name %></div>
+  <ul>
+    <li><div class="">Salary</div><div class=""></div></li>
+    <li><div class="">Adjustments</div><div class=""><%=paycheck.adjustments.sum(:pay)%></div></li>
+    <li><div class="">Hours Worked</div><div class=""></div></li>
+    <li><div class="">Leave Earned</div><div class=""></div></li>
+    <li><div class="">Leave Taken</div><div class=""><%=count_hours paycheck.employee.leaves%></div></li>
+    <li><div class="">Leave Balance</div><div class=""></div></li>
+    <li><div class="">Notes</div><div class=""></div></li>
+  </ul>
+  
+</li>

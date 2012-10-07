@@ -1,7 +1,12 @@
 class WorkedShiftsController < ApplicationController
   include PaychecksHelper
   def index
-    @employee = Employee.find(params[:employee_id])
+    if(params[:employee_id].nil?)
+      @employees = Employee.all
+    else
+      @employee = Employee.find(params[:employee_id])
+      render "employee_index"
+    end
   end
   
   def shifts
