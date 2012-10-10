@@ -11,44 +11,76 @@
 <th>Hours</th>
 <tbody>
   <% current_pay_period.first.upto(current_pay_period.last).each do |d|
-      shift = @employee.worked_shifts.find(:first, conditions: {start_at: get_date_for_day(d.day)..get_date_for_day(d.day+1), end_at: get_date_for_day(d.day)..get_date_for_day(d.day+1)})
-      if(!shift.nil?)
-        start_at = shift.start_at.strftime("h:m")
-        end_at = shift.end_at.strftime("h:m")
+      shift = @employee.worked_shifts.find(:first, conditions: {
+        start_at: get_date_for_day(d.day,0,0)..get_date_for_day(d.day+1,0,0), 
+        end_at: get_date_for_day(d.day,0,0)..get_date_for_day(d.day+1,0,0)
+      })
+      unless(shift.nil?)
+        start_at = shift.start_at.strftime("%H:%M")
+        end_at = shift.end_at.strftime("%H:%M")
       end %>
     <tr> 
     <td><%= d.strftime("%a") %></td>
     <td><%= d.strftime("%d") %></td>
     <td><%= d.strftime("%b") %></td>
-    <td><div style="display:inline-block;width:50px"><%= text_field_tag "start_times[#{d.strftime('%d')}]", start_at, maxlength: 5, width: "10px", onchange: "update('#{d.strftime('%d')}')" %></div></td>
-    <td><div style="display:inline-block;width:50px"><%= text_field_tag  "end_times[#{d.strftime('%d')}]", end_at, maxlength: 5, width: "10px", onchange: "update('#{d.strftime('%d')}')"  %></div></td>
+    <td><div style="display:inline-block;width:50px"><%= text_field_tag "shift_times[#{d.strftime('%d')}][start]", start_at, maxlength: 5, width: "10px" %></div></td>
+    <td><div style="display:inline-block;width:50px"><%= text_field_tag  "shift_times[#{d.strftime('%d')}][end]", end_at, maxlength: 5, width: "10px" %></div></td>
     <td><div id="hours<%=d.strftime("%d")%>" style="padding:10px">&nbsp;</div></td>
     </tr>
   <% end %>
   </tbody>
 </table>
-<%= submit_tag "Save", class: "btn btn-large btn-primary"%>
-
 <h2>Total: <span id="total"></span></h2>
+<div style="padding:10px"><%= submit_tag "Save", class: "btn btn-large btn-primary"%></div>
+
 <% end %>
 </div>
-<%= button_to "Back to Worked Shifts", worked_shifts_path, method: :get, class: "btn btn-large"%>
+<div style="padding:10px"><%= button_to "Back to Worked Shifts", worked_shifts_path, method: :get, class: "btn btn-large"%></div>
 
 <script>
-  function update(id)
+  $(document).ready(function() {
+    $("[name^=shift_times]").each(function(e)
+    {
+     register(this);
+    });
+  });
+  
+  function getControlDay(control)
   {
-    var start = toDate($("#start_times_"+id).val());
-    var end = toDate($("#end_times_"+id).val());
+    return control.name.match(/shift_times\[([0-9]+)\]/)[1];
+  }
+  
+  function register(control)
+  {
+    $(control).change(function() { update(control) }); 
+    update(control);
+  }
+  
+  function update(e)
+  {
+    if(!e)
+      return;
+    var day = getControlDay(e);
+    e = $(e);
+    
+    var start_s = $("#shift_times_"+day+"_start").val();
+    var end_s = $("#shift_times_"+day+"_end").val();
+    
+    var start = toDate(start_s);
+    var end = toDate(end_s);
+    
     if(start.getTime && end.getTime)
     {
       var diff = get_time_difference(start, end);
        
-      $("#hours"+id).text(diff.hours+":"+diff.minutes);
+      $("#hours"+day).text(diff.hours+":"+diff.minutes);
     }
     else
-      $("#hours"+id).text("##");
+      $("#hours"+day).text("##");
+      
     updateTotal();
   }
+  
   function updateTotal()
   {
     var hrs = 0;

@@ -7,14 +7,15 @@
     <th>Recorded Hours</th>
     <th></th>
   </tr>
-
+  <tbody>
 <% @employees.each do |employee| %>
   <tr>
     <td><%= employee.name %></td>
-    <td><%= employee.get_worked_shift_total @startDate, @endDate %></td>
+    <td><%= employee.get_worked_shift_total_for current_pay_period.first, current_pay_period.last %></td>
     <td><%= button_to "Edit hours", employee_worked_shifts_url(employee), method: :get, class: "btn btn-small" %></td>
   </tr>
 <% end %>
+  </tbody>
 </table>
 <%= button_to "Back to Employees", employees_path, class: "btn btn-large", method: :get %> <%= button_to "Leave Hours", leaves_path, method: :get, class: "btn btn-large btn-primary" %>
 <br />

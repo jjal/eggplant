@@ -12,9 +12,9 @@
 
 <% @employee.leaves.each do |leave| %>
   <tr>
-    <td><%=leave.start_at%></td>
-    <td><%=leave.end_at%></td>
-    <td><%=leave.end_at - leave.start_at%></td>
+    <td><%=leave.start_at.strftime("%d %b %Y %H:%M")%></td>
+    <td><%=leave.end_at.strftime("%d %b %Y %H:%M")%></td>
+    <td><%=(leave.end_at - leave.start_at) / 1.hour%></td>
     <td><%= button_to "Delete", leave, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-small" %></td>
   </tr>
 <% end %>

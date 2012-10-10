@@ -6,8 +6,16 @@ class Employee < ActiveRecord::Base
   has_many :paychecks
   has_many :leaves, class_name: "Leave"
   
-  def get_worked_shift_total (start_date, end_date)
-    self.worked_shifts.sum('end_at - start_at', conditions: { start_at: start_date..end_date } )
+  def get_worked_shift_total_for (start_date, end_date)
+    total = 0
+    self.worked_shifts.find(:all, conditions: { start_at: start_date..end_date } ).each do |shift|
+      total += (shift.end_at - shift.start_at) / 1.hour
+    end
+    return total #return number of hours
+  end
+  
+  def get_leave_total_for (start_date, end_date)
+    self.leaves.sum('end_at - start_at', conditions: { start_at: start_date..end_date } ).to_f
   end
   
   def current_paycheck(*args)
@@ -22,4 +30,8 @@ class Employee < ActiveRecord::Base
     return paycheck
   end
   
+  def get_old_leave
+    #todo
+    return 0
+  end
 end

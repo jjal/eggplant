@@ -14,8 +14,8 @@
       paycheck = employee.current_paycheck
 %>
   <tr>
-    <td><%=employee.name%></td>
-    <td><%=paycheck.adjustments.sum(:pay) %></td>
+    <td><%= employee.name %></td>
+    <td><%= paycheck.adjustments.sum(:pay) %></td>
     <td><%= button_to "Edit ", paycheck_adjustments_url(paycheck), method: :get, class: "btn btn-small" %></td>
     <td></td>
   </tr>

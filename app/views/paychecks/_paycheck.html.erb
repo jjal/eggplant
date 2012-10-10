@@ -2,12 +2,12 @@
   <div class=""><%= paycheck.start_at.strftime("%d %b %Y") %> - <%= paycheck.end_at.strftime("%d %b %Y") %></div>
   <div class=""><%= paycheck.employee.name %></div>
   <ul>
-    <li><div class="">Salary</div><div class=""></div></li>
-    <li><div class="">Adjustments</div><div class=""><%=paycheck.adjustments.sum(:pay)%></div></li>
-    <li><div class="">Hours Worked</div><div class=""></div></li>
-    <li><div class="">Leave Earned</div><div class=""></div></li>
-    <li><div class="">Leave Taken</div><div class=""><%=count_hours paycheck.employee.leaves%></div></li>
-    <li><div class="">Leave Balance</div><div class=""></div></li>
+    <li><div class="">Salary</div><div class=""><%= paycheck.get_pay %></div></li>
+    <li><div class="">Adjustments</div><div class=""><%= paycheck.get_adjustments %></div></li>
+    <li><div class="">Hours Worked</div><div class=""><%= paycheck.get_hours %></div></li>
+    <li><div class="">Leave Earned</div><div class=""><%= paycheck.employee.pay_rate.calculate_leave(paycheck) %></div></li>
+    <li><div class="">Leave Taken</div><div class=""><%= paycheck.get_leave_taken_total %></div></li>
+    <li><div class="">Leave Balance</div><div class=""><%= paycheck.get_leave_balance %></div></li>
     <li><div class="">Notes</div><div class=""></div></li>
   </ul>
   

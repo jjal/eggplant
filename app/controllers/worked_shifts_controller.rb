@@ -1,6 +1,7 @@
 class WorkedShiftsController < ApplicationController
   include PaychecksHelper
   def index
+    
     if(params[:employee_id].nil?)
       @employees = Employee.all
     else
@@ -11,20 +12,30 @@ class WorkedShiftsController < ApplicationController
   
   def shifts
     @employee = Employee.find(params[:employee_id])
-    start_times = params[:start_times]
-    end_times = params[:end_times]
-    start_times.each do |i,v|
-      if(!start_times[i].empty? && !end_times[i].empty?)
-        ws = WorkedShift.find(:first, conditions: {start_at: 0})
+    shift_times = params[:shift_times]
+    shift_times.each do |day, v|
+      logger.debug "processing data #{v.inspect}"
+      unless (v['start'].empty? || v['end'].empty?)
+        #try and get any existing worked shift for this date
+        ws = @employee.worked_shifts.find(:first, conditions: { start_at: get_date_for_day(day, 0, 0)..get_date_for_day(day, 23, 59) })
         if(ws.nil?)
-          ws = WorkedShift.new
-          ws.employee_id = @employee.id
+          ws = @employee.worked_shifts.build
         end
-        ws.start_at = get_date_for_day start_times[i]
-        ws.end_at = get_date_for_day end_times[i]
+        ws.start_at = get_date_for_day(day, parse_hours(v['start']), parse_minutes(v['start']))
+        ws.end_at = get_date_for_day(day, parse_hours(v['end']), parse_minutes(v['end']))
         ws.save
-      end
+        logger.debug "made #{ws.inspect}"
+      end 
     end
-    render 'index'
+    redirect_to employee_worked_shifts_path(@employee)
   end
-end
+  
+  private
+    def parse_hours(str)
+      return str[/([0-9]*)\:/, 1]
+    end
+    
+    def parse_minutes(str)
+      return str[/\:([0-9]*)/, 1]
+    end
+end 

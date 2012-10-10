@@ -1,12 +1,14 @@
 namespace :db do
   desc "Fill database with basic data"
   task populate: :environment do
-    make_employees
     make_pay_rates
+    make_employees
   end
 end
 
 def make_employees
+  min_rate = PayRate.minimum(:id)
+  max_rate = PayRate.maximum(:id)
   ["Sean", 
   "Long Sakana", 
   "Kchao Sopheap", 
@@ -22,7 +24,7 @@ def make_employees
   "Noon Ra", 
   "Yon Chenda", 
   "Phearon"].each do |n|
-    Employee.create!(name: n)
+    employee = Employee.create!(name: n, payrate_id: Random.new.rand(min_rate..max_rate))
   end
 end
 
