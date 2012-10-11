@@ -1,0 +1,21 @@
+.payslip {
+  .header {
+    font-size: +4;
+  }
+  .subheader {
+  }
+  .fieldtitle {
+    width: 100px;
+    float:left;
+    padding: 5px;
+  }
+  .contents {
+    padding: 5px;
+  }
+}
+.payslip li{
+  margin-left:-30px;
+}
+ul.payslip {
+   list-style-type: none;
+}

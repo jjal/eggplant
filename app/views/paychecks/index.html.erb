@@ -1,7 +1,7 @@
 <% provide(:title, "Paychecks for pay period "+current_pay_period.first.strftime("%d %b %Y")+" to "+current_pay_period.last.strftime("%d %b %Y")) %>
 <h1>Paychecks <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
 
-<ul>
+<ul class="payslip">
 <% @employees.each do |employee| %>
   <%= render employee.current_paycheck %>
 <% end %>

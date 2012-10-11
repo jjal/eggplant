@@ -1,14 +1,16 @@
 <li>
-  <div class=""><%= paycheck.start_at.strftime("%d %b %Y") %> - <%= paycheck.end_at.strftime("%d %b %Y") %></div>
-  <div class=""><%= paycheck.employee.name %></div>
-  <ul>
-    <li><div class="">Salary</div><div class=""><%= paycheck.get_pay %></div></li>
-    <li><div class="">Adjustments</div><div class=""><%= paycheck.get_adjustments %></div></li>
-    <li><div class="">Hours Worked</div><div class=""><%= paycheck.get_hours %></div></li>
-    <li><div class="">Leave Earned</div><div class=""><%= paycheck.employee.pay_rate.calculate_leave(paycheck) %></div></li>
-    <li><div class="">Leave Taken</div><div class=""><%= paycheck.get_leave_taken_total %></div></li>
-    <li><div class="">Leave Balance</div><div class=""><%= paycheck.get_leave_balance %></div></li>
-    <li><div class="">Notes</div><div class=""></div></li>
+<hr/>
+  <div class="payslip header" style="font-weight: bold"><%= paycheck.employee.name %>: <%= paycheck.employee.pay_rate.name %></div>
+  <div class="payslip subheader">Pay Period: <%= paycheck.start_at.strftime("%d %b %Y") %> - <%= paycheck.end_at.strftime("%d %b %Y") %></div>
+  
+  <ul class="payslip clearfix">
+    <li class="clearfix"><div class="payslip fieldtitle">Salary:</div><div class="payslip contents strong">$<%= paycheck.get_pay %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Adjustments:</div><div class="payslip contents"><%= paycheck.get_adjustments %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Hours Worked:</div><div class="payslip contents"><%= paycheck.get_hours %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Leave Earned:</div><div class="payslip contents"><%= paycheck.employee.pay_rate.calculate_leave(paycheck) %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Leave Taken:</div><div class="payslip contents"><%= paycheck.get_leave_taken_total %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Leave Balance:</div><div class="payslip contents"><%= paycheck.get_leave_balance %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Notes:</div><div class="payslip contents"></div></li>
   </ul>
   
 </li>
