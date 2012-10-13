@@ -4,7 +4,11 @@ class Paycheck < ActiveRecord::Base
   has_many :adjustments
   
   def get_pay
-    employee.pay_rate.calculate_pay(self)
+    self.pay_rate.calculate_pay(self)
+  end
+  
+  def get_leave
+    self.pay_rate.calculate_leave(self)
   end
   
   def get_hours
@@ -20,7 +24,7 @@ class Paycheck < ActiveRecord::Base
   end
   
   def get_leave_balance
-    employee.get_old_leave - employee.get_leave_total_for(self.start_at, self.end_at) + employee.pay_rate.calculate_leave(self)
+    employee.get_old_leave - employee.get_leave_total_for(self.start_at, self.end_at) + self.pay_rate.calculate_leave(self)
   end
   
 end

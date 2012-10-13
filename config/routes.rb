@@ -4,23 +4,19 @@ Eggplant::Application.routes.draw do
   end
   
   resources :pay_rates
-  resources :paychecks do
-    resources :adjustments do
-      end
-  end
   resources :leaves
   resources :adjustments
   resources :worked_shifts
   
+  resources :paychecks do
+    resources :adjustments
+  end
   resources :employees do
     resources :worked_shifts do
       get 'shifts', :on => :collection
     end
-    resources :leaves do
-    end
-    resources :paychecks do
-      
-    end
+    resources :leaves
+    resources :paychecks
   end
   
   root to: 'employees#index'

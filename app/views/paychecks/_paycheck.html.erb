@@ -7,7 +7,7 @@
     <li class="clearfix"><div class="payslip fieldtitle">Salary:</div><div class="payslip contents strong">$<%= paycheck.get_pay %></div></li>
     <li class="clearfix"><div class="payslip fieldtitle">Adjustments:</div><div class="payslip contents"><%= paycheck.get_adjustments %></div></li>
     <li class="clearfix"><div class="payslip fieldtitle">Hours Worked:</div><div class="payslip contents"><%= paycheck.get_hours %></div></li>
-    <li class="clearfix"><div class="payslip fieldtitle">Leave Earned:</div><div class="payslip contents"><%= paycheck.employee.pay_rate.calculate_leave(paycheck) %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Leave Earned:</div><div class="payslip contents"><%= paycheck.get_leave %></div></li>
     <li class="clearfix"><div class="payslip fieldtitle">Leave Taken:</div><div class="payslip contents"><%= paycheck.get_leave_taken_total %></div></li>
     <li class="clearfix"><div class="payslip fieldtitle">Leave Balance:</div><div class="payslip contents"><%= paycheck.get_leave_balance %></div></li>
     <li class="clearfix"><div class="payslip fieldtitle">Notes:</div><div class="payslip contents"></div></li>
