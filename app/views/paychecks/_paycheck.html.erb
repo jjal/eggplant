@@ -1,6 +1,6 @@
 <li>
 <hr/>
-  <div class="payslip header" style="font-weight: bold"><%= paycheck.employee.name %>: <%= paycheck.employee.pay_rate.name %></div>
+  <div class="payslip header" style="font-weight: bold"><%= paycheck.employee.name %>: <%= paycheck.pay_rate.name %></div>
   <div class="payslip subheader">Pay Period: <%= paycheck.start_at.strftime("%d %b %Y") %> - <%= paycheck.end_at.strftime("%d %b %Y") %></div>
   
   <ul class="payslip clearfix">
