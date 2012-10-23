@@ -12,8 +12,8 @@
 <tbody>
   <% current_pay_period.first.upto(current_pay_period.last).each do |d|
       shift = @employee.worked_shifts.find(:first, conditions: {
-        start_at: get_date_for_day(d.day,0,0)..get_date_for_day(d.day+1,0,0), 
-        end_at: get_date_for_day(d.day,0,0)..get_date_for_day(d.day+1,0,0)
+        start_at: get_date_for_day(d.day,0,0)..get_date_for_day(d.day,23,59), 
+        end_at: get_date_for_day(d.day,0,0)..get_date_for_day(d.day,23,59)
       })
       unless(shift.nil?)
         start_at = shift.start_at.strftime("%H:%M")
