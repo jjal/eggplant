@@ -1,9 +1,14 @@
 <% provide(:title, "All employees") %>
 <h1>All employees</h1>
 <%= will_paginate %>
-<ul class="employees">
+<table class="table table-striped">
+<th>Name</th>
+<th>Pay Rate</th>
+<th></th>
+<tbody>
   <%= render @employees %>
-</ul>
+</tbody>
+</table>
 <%= will_paginate %>
 <br />
 

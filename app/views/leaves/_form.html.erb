@@ -1,4 +1,4 @@
-<%= form_for([@employee, @leave]) do |f| %>
+<%= form_for([@employee, @leave], class: "input-small") do |f| %>
   <% if @leave.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@leave.errors.count, "error") %> prohibited this leave from being saved:</h2>
@@ -11,10 +11,10 @@
     </div>
   <% end %>
   <%= f.label :start_at %>
-  <%= f.text_field :start_at %>
+  <%= f.text_field :start_at, class: "input-small"  %>
 
   <%= f.label :end_at %>
-  <%= f.text_field :end_at %>
+  <%= f.text_field :end_at, class: "input-small" %>
 
   <div class="actions">
     <%= f.submit class: "btn btn-large btn-primary"%>

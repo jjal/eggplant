@@ -63,7 +63,7 @@ class AdjustmentsController < ApplicationController
   # DELETE /adjustments/1
   # DELETE /adjustments/1.json
   def destroy
-    @adjustment = adjustment.find(params[:id])
+    @adjustment = Adjustment.find(params[:id])
     @adjustment.destroy
 
     respond_to do |format|

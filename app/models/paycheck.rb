@@ -1,5 +1,5 @@
 class Paycheck < ActiveRecord::Base
-  attr_accessible :delivered_at, :employee_id, :end_at, :id, :payrate_id, :prepared_at, :start_at, :status, :user_id
+  attr_accessible :delivered_at, :employee_id, :end_at, :id, :payrate_id, :prepared_at, :start_at, :status, :user_id, :fte
   belongs_to :employee
   belongs_to :pay_rate, foreign_key: :payrate_id
   has_many :adjustments

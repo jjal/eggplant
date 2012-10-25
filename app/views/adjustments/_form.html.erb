@@ -11,8 +11,10 @@
     </div>
   <% end %>
   <%= f.label :pay %>
-  <%= f.text_field :pay %>
-
+  <%= f.text_field :pay, class: "input-small" %>
+  <%= f.label :leave %>
+  <%= f.text_field :leave, class: "input-small" %>
+  
   <div class="actions">
     <%= f.submit class: "btn btn-large btn-primary"%>
   </div>
