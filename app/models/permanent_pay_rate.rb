@@ -1,7 +1,7 @@
 class PermanentPayRate < PayRate
 
   def calculate_pay(paycheck)
-    return self.monthly_rate.to_f * self.FTE.to_f * get_pay_period_portion(paycheck)
+    return self.monthly_rate.to_f * paycheck.fte.to_f * get_pay_period_portion(paycheck)
   end
   
   def get_pay_period_portion(paycheck)
