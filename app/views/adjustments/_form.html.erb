@@ -1,19 +1,13 @@
 <%= form_for([@paycheck, @adjustment]) do |f| %>
-  <% if @adjustment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@leave.errors.count, "error") %> prohibited this adjustment from being saved:</h2>
-
-      <ul>
-      <% @adjustment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  
+  <%= render "shared/error_messages", object: @adjustment %>
+  
   <%= f.label :pay %>
-  <%= f.text_field :pay, class: "input-small" %>
+  $ <%= f.text_field :pay, class: "input-small" %>
   <%= f.label :leave %>
-  <%= f.text_field :leave, class: "input-small" %>
+  <%= f.text_field :leave, class: "input-small" %> hrs
+  <%= f.label :note %>
+  <%= f.text_area :note, rows: "3" %>
   
   <div class="actions">
     <%= f.submit class: "btn btn-large btn-primary"%>

@@ -1,0 +1,11 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav">
+      <li class="<%= yield(:nav_tab) == "employees" ? "active" : "" %>" ><%= link_to "Employees", employees_path %></a></li>
+      <li class="<%= yield(:nav_tab) == "worked_shifts" ? "active" : "" %>" ><%= link_to "Worked Hours", worked_shifts_path %></li>
+      <li class="<%= yield(:nav_tab) == "leave" ? "active" : "" %>" ><%= link_to "Leave", leaves_path %></li>
+      <li class="<%= yield(:nav_tab) == "adjustments" ? "active" : "" %>" ><%= link_to "Adjustments", adjustments_path %></li>
+      <li class="<%= yield(:nav_tab) == "pay_slips" ? "active" : "" %>" ><%= link_to "Pay Slips", paychecks_path %></li>
+    </ul>
+  </div>
+</div>

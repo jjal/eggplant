@@ -37,7 +37,7 @@ class AdjustmentsController < ApplicationController
     
     respond_to do |format|
       if @adjustment.save
-        format.html { redirect_to paycheck_adjustments_path(@paycheck), notice: 'adjustment was successfully created.' }
+        format.html { redirect_to paycheck_adjustments_path(@paycheck), success: 'adjustment was successfully created.' }
       else
         format.html { render action: "new" }
       end
@@ -51,7 +51,7 @@ class AdjustmentsController < ApplicationController
 
     respond_to do |format|
       if @adjustment.update_attributes(params[:adjustment])
-        format.html { redirect_to @adjustment, notice: 'adjustment was successfully updated.' }
+        format.html { redirect_to @adjustment, success: 'adjustment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -1,9 +1,9 @@
 <tr>
 <td>
-  <%= link_to employee.name, employee_path(employee) %>
+  <%= employee.name %>
   </td><td>
   <%= employee.pay_rate.try(:name) %>
   </td><td>
-  <%= button_to "Edit", edit_employee_path(employee), method: :get, class: "btn btn-small" %>
+  <%= link_to "Edit", edit_employee_path(employee), class: "btn btn-small" %>
   </td>
 </tr>

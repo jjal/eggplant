@@ -1,20 +1,13 @@
 <%= form_for([@employee, @leave], class: "input-small") do |f| %>
-  <% if @leave.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@leave.errors.count, "error") %> prohibited this leave from being saved:</h2>
-
-      <ul>
-      <% @leave.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+ <%= render "shared/error_messages", object: @leave %>
   <%= f.label :start_at %>
   <%= f.text_field :start_at, class: "input-small"  %>
 
   <%= f.label :end_at %>
   <%= f.text_field :end_at, class: "input-small" %>
+  
+  <%= f.label :note %>
+  <%= f.text_area :note, rows: 3 %>
 
   <div class="actions">
     <%= f.submit class: "btn btn-large btn-primary"%>

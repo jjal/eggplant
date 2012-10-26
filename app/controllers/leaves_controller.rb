@@ -37,7 +37,7 @@ class LeavesController < ApplicationController
     
     respond_to do |format|
       if @leave.save
-        format.html { redirect_to employee_leaves_path(@employee), notice: 'leave was successfully created.' }
+        format.html { redirect_to employee_leaves_path(@employee), success: 'leave was successfully created.' }
       else
         format.html { render action: "new" }        
       end
@@ -51,7 +51,7 @@ class LeavesController < ApplicationController
 
     respond_to do |format|
       if @leave.update_attributes(params[:leave])
-        format.html { redirect_to @leave, notice: 'leave was successfully updated.' }
+        format.html { redirect_to @leave, success: 'leave was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -1,5 +1,6 @@
+<% provide(:nav_tab, "leave") %>
 <h1>New Leave for <%= @employee.name %></h1>
-
+  
 <%= render "form" %>
 
 <%= link_to "Back to leave summary", leaves_path, class: "btn btn-large" %>

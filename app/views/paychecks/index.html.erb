@@ -1,4 +1,5 @@
 <% provide(:title, "Paychecks for pay period "+current_pay_period.first.strftime("%d %b %Y")+" to "+current_pay_period.last.strftime("%d %b %Y")) %>
+<% provide(:nav_tab, "pay_slips") %>
 <h1>Paychecks <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
 
 <ul class="payslip">

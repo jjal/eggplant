@@ -1,7 +1,8 @@
 <% provide(:title, "All employees") %>
+<% provide(:nav_tab, "employees") %>
 <h1>All employees</h1>
 <%= will_paginate %>
-<table class="table table-striped">
+<table class="table table-striped table-condensed">
 <th>Name</th>
 <th>Pay Rate</th>
 <th></th>
@@ -11,5 +12,6 @@
 </table>
 <%= will_paginate %>
 <br />
-
+<div style="display:none">
 <%= button_to "Worked Hours", worked_shifts_path, method: :get, class: "btn btn-large btn-primary" %>
+</div>
