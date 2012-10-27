@@ -28,4 +28,17 @@ class Paycheck < ActiveRecord::Base
     employee.get_old_leave - employee.get_leave_total_for(self.start_at, self.end_at) + self.pay_rate.calculate_leave(self)
   end
   
+  def recount
+    self.total_adjustments = self.get_adjustments
+    self.total_hours = self.get_hours
+    self.total_leave = self.get_leave
+    self.total_leave_taken = self.get_leave_taken_total
+    self.total_leave_balance = self.get_leave
+    
+  end
+  
+  def get_previous_paycheck
+    self.employee.paychecks.find(:first, conditions: ["start_at < ?",self.start_at], order: "start_at desc")
+  end
+  
 end

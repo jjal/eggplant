@@ -15,7 +15,11 @@ class Employee < ActiveRecord::Base
   end
   
   def get_leave_total_for (start_date, end_date)
-    self.leaves.sum('end_at - start_at', conditions: { start_at: start_date..end_date } ).to_f
+    total = 0
+    self.leaves.find(:all, conditions: { start_at: start_date..end_date } ).each do |leave|
+      total += (leave.end_at - leave.start_at) / 1.hour
+    end
+    return total #return number of hours
   end
   
   def current_paycheck(*args)
@@ -30,8 +34,4 @@ class Employee < ActiveRecord::Base
     return paycheck
   end
   
-  def get_old_leave
-    #todo
-    return 0
-  end
 end
