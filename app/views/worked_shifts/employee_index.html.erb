@@ -27,13 +27,18 @@
       <td><%= d.strftime("%b") %></td>
       <td><div style="display:inline-block;width:50px"><%= text_field_tag "shift_times[#{d.strftime('%d')}][start]", start_at, maxlength: 5, width: "10px" %></div></td>
       <td><div style="display:inline-block;width:50px"><%= text_field_tag  "shift_times[#{d.strftime('%d')}][end]", end_at, maxlength: 5, width: "10px" %></div></td>
-      <td><div id="hours<%=d.strftime("%d")%>" style="padding:10px">&nbsp;</div></td>
+      <td>
+      <div style="float:right; position:absolute;margin-left:50px;margin-top:5px">
+      <a href="#" onclick="repeatDown(<%=d.strftime('%d')%>)" id="repeat_link_<%=d.strftime('%d')%>">Repeat</a>
+      </div>
+      <div id="hours<%=d.strftime("%d")%>" style="padding:10px">&nbsp;</div></td>
       </tr>
     <% end %>
     </tbody>
   </table>
 </div>
 <div class="pull-right">
+
 <h2>Total: <span id="total"></span></h2>
 </div>
 <div class="clearfix"></div>
@@ -51,6 +56,25 @@
     });
   });
   
+  function repeatDown(day)
+  {
+    var start_s = $("#shift_times_"+day+"_start").val();
+    var end_s = $("#shift_times_"+day+"_end").val();
+   
+    $("[name^=shift_times]").each(function(e) {
+      if(this.id.match(/end$/))
+      {
+        $(this).val(end_s);
+      } else if(this.id.match(/start$/))
+      {
+        $(this).val(start_s);
+        update(this);
+      }
+    });
+    
+    updateTotal();
+  }
+  
   function getControlDay(control)
   {
     return control.name.match(/shift_times\[([0-9]+)\]/)[1];
@@ -58,7 +82,12 @@
   
   function register(control)
   {
+    var day = getControlDay(control);
     $(control).change(function() { update(control) }); 
+    var repeatLink = $("#repeat_link_"+day);
+    $(control).mouseover(function() { repeatLink.fadeIn(500); });
+    $(control).mouseout(function() { repeatLink.delay(1000).fadeOut(1000); });
+    repeatLink.hide();
     update(control);
   }
   
