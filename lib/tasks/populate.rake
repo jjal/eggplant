@@ -10,15 +10,17 @@ def make_employees
   #min_rate = PayRate.minimum(:id)
   #max_rate = PayRate.maximum(:id)
   {
-    "Sean" => PayRate::C_SUPERVISOR,
+    "Oeun Sean" => PayRate::C_SUPERVISOR,
     "Long Sakana" => PayRate::C_KITCHEN_SUPERVISOR,
     "Kchao Sopheap" => PayRate::C_STAFF_CASUAL,
-    "Leng Chhouert" => PayRate::C_STAFF_CASUAL,
+    "Leng Chhouert" => PayRate::O_STAFF_ENTRY,
+    "Leng Chhouert (cafe)" => PayRate::C_STAFF_CASUAL,
     "Samnang" => PayRate::C_STAFF_CASUAL_ENTRY,
     "Sophy" => PayRate::C_STAFF_CASUAL_ENTRY,
     "Chan Chaiya" => PayRate::C_STAFF_PERMANENT_ENTRY_PROBATION,
     "Prom Bopha" => PayRate::C_STAFF_PERMANENT_ENTRY_PROBATION,
-    "Vatha" => PayRate::C_STAFF_PERMANENT_ENTRY_PROBATION,
+    "Vatha" => PayRate::O_STAFF_ENTRY,
+    "Vatha (cafe)" => PayRate::C_STAFF_PERMANENT_ENTRY_PROBATION,
     "Phalla" => PayRate::S_OPERATIONS_MGR,
     "Seavyi" => PayRate::O_STAFF_ENTRY,
     "Khou Sopheap" => PayRate::C_BUSINESS_MGR,
