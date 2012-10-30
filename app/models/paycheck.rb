@@ -20,6 +20,10 @@ class Paycheck < ActiveRecord::Base
     return self.adjustments.sum(:pay)
   end 
   
+  def get_adjustments_leave
+    return self.adjustments.sum(:leave)
+  end 
+  
   def get_leave_taken_total
     employee.get_leave_total_for self.start_at, self.end_at
   end
@@ -29,12 +33,13 @@ class Paycheck < ActiveRecord::Base
   end
   
   def recount
-    self.total_adjustments = self.get_adjustments
+    self.total_adjustments_pay = self.get_adjustments
+    self.total_adjustments_leave = self.get_adjustments_leave
     self.total_hours = self.get_hours
     self.total_leave = self.get_leave
     self.total_leave_taken = self.get_leave_taken_total
     self.total_leave_balance = self.get_leave
-    
+    self.total_pay = self.get_pay
   end
   
   def get_previous_paycheck

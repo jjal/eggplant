@@ -4,12 +4,12 @@
   <div class="payslip subheader">Pay Period: <%= paycheck.start_at.strftime("%d %b %Y") %> - <%= paycheck.end_at.strftime("%d %b %Y") %></div>
   
   <ul class="payslip clearfix">
-    <li class="clearfix"><div class="payslip fieldtitle">Salary:</div><div class="payslip contents strong">$<%= paycheck.get_pay %></div></li>
-    <li class="clearfix"><div class="payslip fieldtitle">Adjustments:</div><div class="payslip contents"><%= paycheck.get_adjustments %></div></li>
-    <li class="clearfix"><div class="payslip fieldtitle">Hours Worked:</div><div class="payslip contents"><%= paycheck.get_hours %></div></li>
-    <li class="clearfix"><div class="payslip fieldtitle">Leave Earned:</div><div class="payslip contents"><%= paycheck.get_leave %></div></li>
-    <li class="clearfix"><div class="payslip fieldtitle">Leave Taken:</div><div class="payslip contents"><%= paycheck.get_leave_taken_total %></div></li>
-    <li class="clearfix"><div class="payslip fieldtitle">Leave Balance:</div><div class="payslip contents"><%= paycheck.get_leave_balance %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Salary:</div><div class="payslip contents strong">$<%= paycheck.total_pay %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Adjustments:</div><div class="payslip contents"><%= paycheck.total_adjustments_pay %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Hours Worked:</div><div class="payslip contents"><%= paycheck.total_hours %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Leave Earned:</div><div class="payslip contents"><%= paycheck.total_leave %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Leave Taken:</div><div class="payslip contents"><%= paycheck.total_leave_taken %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Leave Balance:</div><div class="payslip contents"><%= paycheck.total_leave_balance %></div></li>
   </ul>
   
 </li>

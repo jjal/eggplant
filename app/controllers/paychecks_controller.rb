@@ -88,10 +88,7 @@ class PaychecksController < ApplicationController
       @endDate = get_end_date_for(DateTime.now)
       @employees = Employee.all
       @employees.each do |e|
-        if(e.paychecks.find(:all, conditions: { start_at: @startDate, end_at: @endDate }).size == 0)
-          e.paychecks << Paycheck.new(start_at: @startDate, end_at: @endDate)
-          e.save
-        end
+        e.current_paycheck.recount
       end
     end
 end

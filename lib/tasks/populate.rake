@@ -37,10 +37,10 @@ def make_pay_rates
   PayRate.create!(id: PayRate::S_MECHANIC, name:"Soksabike mechanic", type:"PermanentPayRate", monthly_rate: 125, FTE: 0.2) #ra
   PayRate.create!(id: PayRate::S_ASSISTANT, name:"Soksabike assistant", type:"PermanentPayRate", monthly_rate: 70, FTE: 0.26) #phiron
   
-  PayRate.create!(id: PayRate::C_BUSINESS_MGR, name:"Cafe business manager candidate", type:"PermanentPayRate", monthly_rate: 130, FTE: 0.75) #sopheap
-  PayRate.create!(id: PayRate::C_OPERATIONS_MGR, name:"Cafe operations manager candidate", type:"PermanentPayRate", monthly_rate: 110, FTE: 0.75) #chenda
+  PayRate.create!(id: PayRate::C_BUSINESS_MGR, name:"Cafe business manager candidate", type:"PermanentPayRate", monthly_rate: 150, FTE: 0.5) #sopheap
+  PayRate.create!(id: PayRate::C_OPERATIONS_MGR, name:"Cafe operations manager candidate", type:"PermanentPayRate", monthly_rate: 130, FTE: 0.5) #chenda
   PayRate.create!(id: PayRate::C_SUPERVISOR, name:"Cafe supervisor", type:"PermanentPayRate", monthly_rate: 100, FTE: 1.0) #sean
-  PayRate.create!(id: PayRate::C_KITCHEN_SUPERVISOR, name:"Cafe kitchen supervisor", type:"PermanentPayRate", monthly_rate: 90, FTE: 1.0) #sakana
+  PayRate.create!(id: PayRate::C_KITCHEN_SUPERVISOR, name:"Cafe kitchen supervisor", type:"PermanentPayRate", monthly_rate: 80, FTE: 1.0) #sakana
   
   PayRate.create!(id: PayRate::C_STAFF_CASUAL, name:"Normal cafe casual", type:"CasualPayRate", hourly_rate: 0.31) #kchao sopheap
   PayRate.create!(id: PayRate::C_STAFF_CASUAL_ENTRY, name:"Entry cafe casual", type:"CasualPayRate", hourly_rate: 0.26) #samnang, sophy
