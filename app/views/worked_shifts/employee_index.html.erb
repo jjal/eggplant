@@ -29,7 +29,7 @@
       <td><div style="display:inline-block;width:50px"><%= text_field_tag  "shift_times[#{d.strftime('%d')}][end]", end_at, maxlength: 5, width: "10px" %></div></td>
       <td>
       <div style="float:right; position:absolute;margin-left:65px;margin-top:6px">
-      <a href="#" onclick="repeatDown(<%=d.strftime('%d')%>)" id="repeat_link_<%=d.strftime('%d')%>">Repeat</a>
+      <a href="#" onclick="repeatDown('<%=d.strftime("%d")%>')" id="repeat_link_<%=d.strftime("%d")%>">Repeat</a>
       </div>
       <div id="hours<%=d.strftime("%d")%>" style="padding:10px">&nbsp;</div></td>
       </tr>
@@ -60,7 +60,6 @@
   {
     var start_s = $("#shift_times_"+day+"_start").val();
     var end_s = $("#shift_times_"+day+"_end").val();
-   
     $("[name^=shift_times]").each(function(e) {
       if(this.id.match(/end$/))
       {
