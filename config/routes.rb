@@ -13,7 +13,7 @@ Eggplant::Application.routes.draw do
   end
   resources :employees do
     resources :worked_shifts do
-      get 'shifts', :on => :collection
+      post 'shifts', :on => :collection
     end
     resources :leaves
     resources :paychecks
