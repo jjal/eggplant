@@ -88,7 +88,9 @@ class PaychecksController < ApplicationController
       @endDate = get_end_date_for(DateTime.now)
       @employees = Employee.all
       @employees.each do |e|
-        e.current_paycheck.recount
+        pc = e.current_paycheck
+        pc.recount
+        pc.save!
       end
     end
 end
