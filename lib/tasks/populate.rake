@@ -3,32 +3,37 @@ namespace :db do
   task populate: :environment do
     make_pay_rates
     make_employees
+    make_starter_paychecks
   end
+end
+
+def get_employees
+  {
+    "Oeun Sean" => { rate: PayRate::C_SUPERVISOR, leave: 21.16},
+    "Long Sakana" => { rate: PayRate::C_KITCHEN_SUPERVISOR, leave: 71.58},
+    "Kchao Sopheap" => { rate: PayRate::C_STAFF_CASUAL, leave: 26.41},
+    "Leng Chhouert" => { rate: PayRate::O_STAFF_ENTRY, leave: 6},
+    "Leng Chhouert (cafe)" => { rate: PayRate::C_STAFF_CASUAL, leave: 46.9},
+    "Samnang" => { rate: PayRate::C_STAFF_CASUAL_ENTRY, leave: 30.85},
+    "Sophy" => { rate: PayRate::C_STAFF_CASUAL_ENTRY, leave: 22.5},
+    "Chan Chaiya" => { rate: PayRate::C_STAFF_PERMANENT_ENTRY_PROBATION, leave: 10.21},
+    "Prom Bopha" => { rate: PayRate::C_STAFF_PERMANENT_ENTRY_PROBATION, leave: 6.08},
+    "Vatha" => { rate: PayRate::O_STAFF_ENTRY, leave: 6},
+    "Vatha (cafe)" => { rate: PayRate::C_STAFF_PERMANENT_ENTRY_PROBATION, leave: 11.55},
+    "Phalla" => { rate: PayRate::S_OPERATIONS_MGR, leave: -11.84},
+    "Seavyi" => { rate: PayRate::O_STAFF_ENTRY, leave: 0},
+    "Khou Sopheap" => { rate: PayRate::C_BUSINESS_MGR, leave: 3.5},
+    "Noon Ra" => { rate: PayRate::S_MECHANIC, leave: 0},
+    "Yon Chenda" => { rate: PayRate::C_OPERATIONS_MGR, leave: 8},
+    "Phearon" => { rate: PayRate::S_ASSISTANT, leave: 0}
+  }
 end
 
 def make_employees
   #min_rate = PayRate.minimum(:id)
   #max_rate = PayRate.maximum(:id)
-  {
-    "Oeun Sean" => PayRate::C_SUPERVISOR,
-    "Long Sakana" => PayRate::C_KITCHEN_SUPERVISOR,
-    "Kchao Sopheap" => PayRate::C_STAFF_CASUAL,
-    "Leng Chhouert" => PayRate::O_STAFF_ENTRY,
-    "Leng Chhouert (cafe)" => PayRate::C_STAFF_CASUAL,
-    "Samnang" => PayRate::C_STAFF_CASUAL_ENTRY,
-    "Sophy" => PayRate::C_STAFF_CASUAL_ENTRY,
-    "Chan Chaiya" => PayRate::C_STAFF_PERMANENT_ENTRY_PROBATION,
-    "Prom Bopha" => PayRate::C_STAFF_PERMANENT_ENTRY_PROBATION,
-    "Vatha" => PayRate::O_STAFF_ENTRY,
-    "Vatha (cafe)" => PayRate::C_STAFF_PERMANENT_ENTRY_PROBATION,
-    "Phalla" => PayRate::S_OPERATIONS_MGR,
-    "Seavyi" => PayRate::O_STAFF_ENTRY,
-    "Khou Sopheap" => PayRate::C_BUSINESS_MGR,
-    "Noon Ra" => PayRate::S_MECHANIC,
-    "Yon Chenda" => PayRate::C_OPERATIONS_MGR,
-    "Phearon" => PayRate::S_ASSISTANT
-  }.each do |n,p|
-    employee = Employee.create!(name: n, payrate_id: p)
+  get_employees.each do |n,p|
+    employee = Employee.create!(name: n, payrate_id: p[:rate])
   end
 end
 
@@ -52,4 +57,12 @@ def make_pay_rates
   
   PayRate.create!(id: PayRate::O_STAFF_ENTRY, name:"Entry level office", type:"PermanentPayRate", monthly_rate: 70, FTE: (12/45)) #yong, vatha
   #seavyi? 
+end
+
+def make_starter_paychecks
+  get_employees.each do |n,p|
+    employee = Employee.find(:first, conditions: {name:n})
+    pc = employee.paychecks.build(start_at: DateTime.new("2012-01-01"), end_at: DateTime.new("2012-01-15"), total_leave_balance: p[:leave])
+    pc.save!
+  end
 end
