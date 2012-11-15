@@ -23,8 +23,10 @@ namespace :db do
       "Leng Chhouert"=>	1.50,
       "Vatha"=>	1.50
     }.each do |n, b|
+      
       employee = Employee.find(:first, conditions: {name: n})
       pc = employee.paychecks.find(:first) || employee.paychecks.build(start_at: DateTime.parse("2012-01-01"), end_at: DateTime.parse("2012-01-01"))
+      puts "setting #{employee.name} #{pc.start_at}: #{b}"
       pc.total_leave_balance = (pc.total_leave_balance || 0) + b
       pc.save!
     end
