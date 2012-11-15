@@ -25,9 +25,9 @@ namespace :db do
     }.each do |n, b|
       
       employee = Employee.find(:first, conditions: {name: n})
-      pc = employee.paychecks.find(:first) || employee.paychecks.build(start_at: DateTime.parse("2012-01-01"), end_at: DateTime.parse("2012-01-01"))
+      pc = employee.paychecks.find(:first, order: "start_at DESC", conditions: ["start_at < ?", DateTime.parse("2012-11-01")]) || employee.paychecks.build(start_at: DateTime.parse("2012-01-01"), end_at: DateTime.parse("2012-01-01"))
       puts "setting #{employee.name} #{pc.start_at}: #{b}"
-      pc.total_leave_balance = (pc.total_leave_balance || 0) + b
+      pc.total_leave_balance = b
       pc.save!
     end
   end
