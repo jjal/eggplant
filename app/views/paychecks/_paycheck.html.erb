@@ -4,12 +4,12 @@
   <div class="payslip subheader">Pay Period: <%= paycheck.start_at.strftime("%d %b %Y") %> - <%= paycheck.end_at.strftime("%d %b %Y") %></div>
   
   <ul class="payslip clearfix">
-    <li class="clearfix"><div class="payslip fieldtitle">Salary:</div><div class="payslip contents strong">$<%= paycheck.total_pay %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Salary:</div><div class="payslip contents strong">$<%= number_with_precision paycheck.total_pay, precision: 2 %></div></li>
     <li class="clearfix"><div class="payslip fieldtitle">Adjustments:</div><div class="payslip contents"><%= paycheck.total_adjustments_pay %></div></li>
     <li class="clearfix"><div class="payslip fieldtitle">Hours Worked:</div><div class="payslip contents"><%= paycheck.total_hours %></div></li>
-    <li class="clearfix"><div class="payslip fieldtitle">Leave Earned:</div><div class="payslip contents"><%= paycheck.total_leave %></div></li>
-    <li class="clearfix"><div class="payslip fieldtitle">Leave Taken:</div><div class="payslip contents"><%= paycheck.total_leave_taken %></div></li>
-    <li class="clearfix"><div class="payslip fieldtitle">Leave Balance:</div><div class="payslip contents"><%= paycheck.total_leave_balance %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Leave Earned:</div><div class="payslip contents"><%= number_with_precision paycheck.total_leave, precision: 2 %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Leave Taken:</div><div class="payslip contents"><%= number_with_precision paycheck.total_leave_taken, precision: 2 %></div></li>
+    <li class="clearfix"><div class="payslip fieldtitle">Leave Balance:</div><div class="payslip contents"><%= number_with_precision paycheck.total_leave_balance, precision: 2 %></div></li>
   </ul>
   
 </li>
