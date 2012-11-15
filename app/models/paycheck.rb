@@ -29,7 +29,7 @@ class Paycheck < ActiveRecord::Base
   end
   
   def get_leave_balance
-    employee.get_old_leave - employee.get_leave_total_for(self.start_at, self.end_at) + self.pay_rate.calculate_leave(self)
+    employee.get_old_leave(self.start_at) - employee.get_leave_total_for(self.start_at, self.end_at) + self.pay_rate.calculate_leave(self)
   end
   
   def recount
@@ -38,7 +38,7 @@ class Paycheck < ActiveRecord::Base
     self.total_hours = self.get_hours
     self.total_leave = self.get_leave
     self.total_leave_taken = self.get_leave_taken_total
-    self.total_leave_balance = self.get_leave
+    self.total_leave_balance = self.get_leave_balance
     self.total_pay = self.get_pay
   end
   
