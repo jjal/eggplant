@@ -15,6 +15,7 @@ class PayRate < ActiveRecord::Base
   C_STAFF_PERMANENT_ENTRY_PROBATION = 10
   O_STAFF_ENTRY = 11
   S_ASSISTANT = 12
+  C_STAFF_PERMANENT = 13
   
   def calculate_leave(paycheck)
     paycheck.get_hours * HOURLY_LEAVE_EARNED
