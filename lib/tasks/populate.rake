@@ -7,25 +7,24 @@ namespace :db do
   end
   
   task add_leave_balance: :environment do
-    "Oeun Sean"	21.16 
-    "Long Sakana"	71.58 
-    "Kchao Sopheap"	26.41 
-    "Leng Chhouert (cafe)"	46.90 
-    "Samnang"	30.85 
-    "Sophy"	22.50 
-    "Chan Chaiya"	10.21 
-    "Prom Bopha"	6.08 
-    "Vatha (cafe)"	11.55 
-
-    "Phalla"	-2.96
-    "Seavyi"		
-    "Khou Sopheap"	3.50
-    "Yon Chenda"	2.00
-    "Leng Chhouert"	1.50
-    Vutha	1.50
-    Reaksmey	
-    Phearon	
-
+    {
+      "Oeun Sean"=>	21.16,
+      "Long Sakana"=>	71.58, 
+      "Kchao Sopheap"=>	26.41, 
+      "Leng Chhouert (cafe)"=>	46.90, 
+      "Samnang"=>	30.85, 
+      "Sophy"=>	22.50, 
+      "Chan Chaiya"=>	10.21, 
+      "Prom Bopha"=>	6.08, 
+      "Vatha (cafe)"=>	11.55, 
+      "Phalla"=>	-2.96,		
+      "Khou Sopheap"=>	3.50,
+      "Yon Chenda"=>	2.00,
+      "Leng Chhouert"=>	1.50,
+      "Vatha"=>	1.50
+    }.each do |n, b|
+      employee = Employee.find(:first, name: n)
+    end
   end
 end
 
