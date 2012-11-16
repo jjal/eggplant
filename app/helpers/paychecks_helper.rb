@@ -1,4 +1,5 @@
 module PaychecksHelper
+  
   def get_start_date_for(t)
     t = t.change(hour: 0)
     if(t.day >= 16)
@@ -19,11 +20,17 @@ module PaychecksHelper
     t
   end
   
+  def get_pay_period_for(t)
+    return get_start_date_for(t)..get_end_date_for(t)
+  end
+  
   def current_pay_period
-    get_start_date_for(DateTime.now)..get_end_date_for(DateTime.now)
+    session[:current_pay_period] ||= get_start_date_for(DateTime.now)..get_end_date_for(DateTime.now)
+    return session[:current_pay_period]
   end 
   
   def get_date_for_day(day_number, hours, minutes)
     DateTime.new(current_pay_period.first.year, current_pay_period.first.month, day_number.to_i, hours.to_i, minutes.to_i)
   end
+  
 end

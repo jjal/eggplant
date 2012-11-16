@@ -1,9 +1,12 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Start", root_path, id: "logo" %>
+      <%= link_to "Home", root_path, id: "logo" %>
+      Pay period: <%= current_pay_period.first.strftime("%d %b %Y") %> - <%= current_pay_period.last.strftime("%d %b %Y") %>
       <nav>
         <ul class="nav pull-right">
+        <li><%= link_to "Previous pay period", previous_pay_period_sessions_path, method: :post %></li>
+        <li><%= link_to "Next pay period", next_pay_period_sessions_path, method: :post %></li>
         </ul>
       </nav>
     </div>

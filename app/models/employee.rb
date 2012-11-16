@@ -1,5 +1,6 @@
 class Employee < ActiveRecord::Base
   include PaychecksHelper
+  
   attr_accessible :name, :payrate_id
   belongs_to :pay_rate, foreign_key: :payrate_id
   has_many :worked_shifts
@@ -27,9 +28,7 @@ class Employee < ActiveRecord::Base
     return pc.nil? ? 0 : pc.total_leave_balance
   end
   
-  def current_paycheck(*args)
-    start_date = args[0] || current_pay_period.first
-    end_date = args[1] || current_pay_period.last
+  def current_paycheck(start_date, end_date)
     
     paycheck = self.paychecks.find(:first, conditions: { start_at: start_date..end_date })
     if(paycheck.nil?)

@@ -19,6 +19,11 @@ Eggplant::Application.routes.draw do
     resources :paychecks
   end
   
+  resources :sessions do
+    post 'previous_pay_period', on: :collection
+    post 'next_pay_period', on: :collection
+  end
+  
   root to: 'employees#index'
   
 end
