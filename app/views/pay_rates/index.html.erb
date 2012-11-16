@@ -8,6 +8,7 @@
     <th>Hourly Rate</th>
     <th>Monthly Rate</th>
     <th>FTE</th>
+    <th>Employees</th>
   </tr>
 
 <% @pay_rates.each do |pay_rate| %>
@@ -17,8 +18,9 @@
     <td><%= pay_rate.hourly_rate %></td>
     <td><%= pay_rate.monthly_rate %></td>
     <td><%= pay_rate.FTE %></td>
+    <td><%= pay_rate.employees.count %></td>
   </tr>
 <% end %>
 </table>
-
+<%= button_to "New pay rate", new_pay_rate_url, method: :get, class: "btn btn-large btn-primary" %>
 <br />
