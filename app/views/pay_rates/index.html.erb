@@ -9,6 +9,7 @@
     <th>Monthly Rate</th>
     <th>FTE</th>
     <th>Employees</th>
+    <th>Added</th>
   </tr>
 
 <% @pay_rates.each do |pay_rate| %>
@@ -19,6 +20,7 @@
     <td><%= pay_rate.monthly_rate %></td>
     <td><%= pay_rate.FTE %></td>
     <td><%= pay_rate.employees.count %></td>
+    <td><%= pay_rate.created_at.strftime("%d %b %Y") %></td>
   </tr>
 <% end %>
 </table>
