@@ -4,6 +4,9 @@ Eggplant::Application.routes.draw do
   end
   
   resources :pay_rates
+  resources :permanent_pay_rates
+  resources :casual_pay_rates
+  
   resources :leaves
   resources :adjustments
   resources :worked_shifts

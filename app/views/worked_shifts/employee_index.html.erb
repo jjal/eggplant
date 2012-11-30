@@ -12,7 +12,7 @@
     <th>Stop</th>
     <th>Hours</th>
     <tbody>
-    <% current_pay_period.first.upto(current_pay_period.last).each do |d|
+    <% current_pay_period(@employee).first.upto(current_pay_period(@employee).last).each do |d|
         shift = @employee.worked_shifts.find(:first, conditions: {
           start_at: get_date_for_day(d.day,0,0)..get_date_for_day(d.day,23,59), 
           end_at: get_date_for_day(d.day,0,0)..get_date_for_day(d.day,23,59)

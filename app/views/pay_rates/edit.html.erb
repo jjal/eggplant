@@ -1,9 +1,5 @@
-<h1>Editing pay_rate</h1>
+<h1>Editing Pay Rate</h1>
 
-<%= form_for(@pay_rate) do |f| %>
-      <%= render "fields", f: f %>
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-<% end %>
+<%= render "form" %>
 
-<%= link_to 'Show', @pay_rate %> |
-<%= link_to 'Back', pay_rates_path %>
+<%= link_to "Back", pay_rates_path, class: "btn btn-large" %>

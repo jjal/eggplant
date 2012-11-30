@@ -1,8 +1,8 @@
 module PaychecksHelper
   
-  def get_start_date_for(t)
+  def get_start_date_for(t, monthly=false)
     t = t.change(hour: 0)
-    if(t.day >= 16)
+    if(t.day >= 16 && !(monthly||false))
       t = t.change(day: 16)
     else
       t = t.change(day: 1)
@@ -10,9 +10,9 @@ module PaychecksHelper
     t
   end
   
-  def get_end_date_for(t)
+  def get_end_date_for(t, monthly=false)
     t = t.change(hour: 23, minute: 59, second: 59)
-    if(t.day <= 15)
+    if(t.day <= 15 && !(monthly||false))
       t = t.change(day: 15)
     else
      t = t.change(day: t.end_of_month.day)
@@ -24,8 +24,8 @@ module PaychecksHelper
     return get_start_date_for(t)..get_end_date_for(t)
   end
   
-  def current_pay_period
-    session[:current_pay_period] ||= get_start_date_for(DateTime.now)..get_end_date_for(DateTime.now)
+  def current_pay_period(employee=nil)
+    session[:current_pay_period] ||= get_start_date_for(DateTime.now, monthly)..get_end_date_for(DateTime.now, monthly)
     return session[:current_pay_period]
   end 
   

@@ -6,6 +6,14 @@ namespace :db do
     make_employees
   end
   
+  task add_monthly_settings: :environment do
+    [1, 19].each do |id|
+      pr = PayRate.find(id)
+      pr.monthly = true
+      pr.save!
+    end
+  end
+  
   task add_leave_balance: :environment do
     {
       "Oeun Sean"=>	21.16,

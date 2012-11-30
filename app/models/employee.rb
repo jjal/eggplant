@@ -28,8 +28,9 @@ class Employee < ActiveRecord::Base
     return pc.nil? ? 0 : pc.total_leave_balance
   end
   
-  def current_paycheck(start_date, end_date)
-    
+  def current_paycheck(end_date)
+    start_date = get_start_date_for(end_date, self.pay_rate.monthly?)
+
     paycheck = self.paychecks.find(:first, conditions: { start_at: start_date..end_date })
     if(paycheck.nil?)
       paycheck = self.paychecks.build(start_at: start_date, end_at: end_date, payrate_id: self.payrate_id, fte: self.pay_rate.FTE)

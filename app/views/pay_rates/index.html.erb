@@ -3,22 +3,27 @@
 
 <table  class="table table-striped table-condensed">
   <tr>
+    <th>ID</th>
     <th>Name</th>
     <th>Type</th>
     <th>Hourly Rate</th>
     <th>Monthly Rate</th>
     <th>FTE</th>
+    <th>Monthly?</th>
     <th>Employees</th>
     <th>Added</th>
+    <th></th>
   </tr>
 
 <% @pay_rates.each do |pay_rate| %>
   <tr>
+    <td><%= pay_rate.id %></td>
     <td><%= pay_rate.name %></td>
     <td><%= pay_rate.type %></td>
     <td><%= pay_rate.hourly_rate %></td>
     <td><%= pay_rate.monthly_rate %></td>
-    <td><%= pay_rate.FTE %></td>
+    <td><%= "%.2f"%(pay_rate.FTE||0) %></td>
+    <td><%= pay_rate.monthly ? "X" : "" %></td>
     <td><%= pay_rate.employees.count %></td>
     <td><%= pay_rate.created_at.strftime("%d %b %Y") %></td>
   </tr>
