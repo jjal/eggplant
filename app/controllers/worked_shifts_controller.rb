@@ -17,17 +17,17 @@ class WorkedShiftsController < ApplicationController
       logger.debug "processing data #{v.inspect}"
       unless (v['start'].empty? || v['end'].empty?)
         #try and get any existing worked shift for this date
-        ws = @employee.worked_shifts.find(:first, conditions: { start_at: get_date_for_day(day, 0, 0)..get_date_for_day(day, 23, 59) })
+        ws = @employee.worked_shifts.find(:first, conditions: { start_at: get_date_for_day(@employee, day, 0, 0)..get_date_for_day(@employee, day, 23, 59) })
         if(ws.nil?)
           ws = @employee.worked_shifts.build
         end
-        ws.start_at = get_date_for_day(day, parse_hours(v['start']), parse_minutes(v['start']))
-        ws.end_at = get_date_for_day(day, parse_hours(v['end']), parse_minutes(v['end']))
+        ws.start_at = get_date_for_day(@employee, day, parse_hours(v['start']), parse_minutes(v['start']))
+        ws.end_at = get_date_for_day(@employee, day, parse_hours(v['end']), parse_minutes(v['end']))
         ws.save
         logger.debug "made #{ws.inspect}"
       end 
     end
-    redirect_to employee_worked_shifts_path(@employee)
+    redirect_to worked_shifts_path
   end
   
   private

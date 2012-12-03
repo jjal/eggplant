@@ -14,8 +14,8 @@
     <tbody>
     <% current_pay_period(@employee).first.upto(current_pay_period(@employee).last).each do |d|
         shift = @employee.worked_shifts.find(:first, conditions: {
-          start_at: get_date_for_day(d.day,0,0)..get_date_for_day(d.day,23,59), 
-          end_at: get_date_for_day(d.day,0,0)..get_date_for_day(d.day,23,59)
+          start_at: get_date_for_day(@employee, d.day,0,0)..get_date_for_day(@employee, d.day,23,59), 
+          end_at: get_date_for_day(@employee, d.day,0,0)..get_date_for_day(@employee, d.day,23,59)
         })
         unless(shift.nil?)
           start_at = shift.start_at.strftime("%H:%M")
@@ -28,8 +28,9 @@
       <td><div style="display:inline-block;width:50px"><%= text_field_tag "shift_times[#{d.strftime('%d')}][start]", start_at, maxlength: 5, width: "10px" %></div></td>
       <td><div style="display:inline-block;width:50px"><%= text_field_tag  "shift_times[#{d.strftime('%d')}][end]", end_at, maxlength: 5, width: "10px" %></div></td>
       <td>
-      <div style="float:right; position:absolute;margin-left:65px;margin-top:6px">
-      <a href="#" onclick="repeatDown('<%=d.strftime("%d")%>')" id="repeat_link_<%=d.strftime("%d")%>">Repeat</a>
+      <div id="controlsDiv_<%=d.strftime("%d")%>" class="shift_controls">
+        <a href="#" onclick="repeatDown('<%=d.strftime("%d")%>'); return false;" id="repeat_link_<%=d.strftime("%d")%>" class="label label-info">Repeat</a> 
+        <a href="#" onclick="clear_day('<%=d.strftime("%d")%>'); return false;" id="clear_link_<%=d.strftime("%d")%>" class="label label-important">Clear</a>
       </div>
       <div id="hours<%=d.strftime("%d")%>" style="padding:10px">&nbsp;</div></td>
       </tr>
@@ -43,8 +44,7 @@
 </div>
 <div class="clearfix"></div>
 <div>
- <div style="padding:10px"><%= submit_tag "Save", class: "btn btn-large btn-primary"%>
-  <%= link_to "Back to Worked Shifts", worked_shifts_path, class: "btn btn-large"%></div>
+ <div style="padding:10px"><%= submit_tag "Save", class: "btn btn-large btn-primary"%></div>
 </div>
 <% end %>
 
@@ -55,6 +55,18 @@
      register(this);
     });
   });
+  
+  function clear_day(day)
+  {
+    var start = $("#shift_times_"+day+"_start");
+    var end = $("#shift_times_"+day+"_end");
+    start.val('');
+    end.val('');
+    
+    update(end.get(0));
+      
+    updateTotal();
+  }
   
   function repeatDown(day)
   {
@@ -83,10 +95,10 @@
   {
     var day = getControlDay(control);
     $(control).change(function() { update(control) }); 
-    var repeatLink = $("#repeat_link_"+day);
-    $(control).mouseover(function() { repeatLink.fadeIn(500); });
-    $(control).mouseout(function() { repeatLink.delay(1000).fadeOut(1000); });
-    repeatLink.hide();
+    var controlsDiv = $("#controlsDiv_"+day);
+    $(control).mouseover(function() { controlsDiv.fadeIn(500); });
+    $(control).mouseout(function() { controlsDiv.delay(1000).fadeOut(1000); });
+    controlsDiv.hide();
     update(control);
   }
   

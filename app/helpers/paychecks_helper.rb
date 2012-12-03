@@ -25,12 +25,19 @@ module PaychecksHelper
   end
   
   def current_pay_period(employee=nil)
-    session[:current_pay_period] ||= get_start_date_for(DateTime.now, monthly)..get_end_date_for(DateTime.now, monthly)
-    return session[:current_pay_period]
+    
+    session[:current_pay_period] ||= get_start_date_for(DateTime.now)..get_end_date_for(DateTime.now)
+    
+    if(employee.nil?)
+      return session[:current_pay_period]
+    else
+      return get_start_date_for(session[:current_pay_period].first, employee.pay_rate.monthly?)..get_end_date_for(session[:current_pay_period].first, employee.pay_rate.monthly?)
+    end
+    
   end 
   
-  def get_date_for_day(day_number, hours, minutes)
-    DateTime.new(current_pay_period.first.year, current_pay_period.first.month, day_number.to_i, hours.to_i, minutes.to_i)
+  def get_date_for_day(employee, day_number, hours, minutes)
+    DateTime.new(current_pay_period(employee).first.year, current_pay_period(employee).first.month, day_number.to_i, hours.to_i, minutes.to_i)
   end
   
 end

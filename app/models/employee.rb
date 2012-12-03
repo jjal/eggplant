@@ -30,13 +30,22 @@ class Employee < ActiveRecord::Base
   
   def current_paycheck(end_date)
     start_date = get_start_date_for(end_date, self.pay_rate.monthly?)
-
+    end_date = get_end_date_for(end_date, self.pay_rate.monthly?)
+    
     paycheck = self.paychecks.find(:first, conditions: { start_at: start_date..end_date })
     if(paycheck.nil?)
       paycheck = self.paychecks.build(start_at: start_date, end_at: end_date, payrate_id: self.payrate_id, fte: self.pay_rate.FTE)
       paycheck.save!
     end
     return paycheck
+  end
+  
+  def current_pay_period
+    current_pay_period(self)
+  end
+  
+  def get_pay_period_leaves
+    return self.leaves.find(:all, conditions: {start_at: self.current_pay_period})
   end
   
 end
