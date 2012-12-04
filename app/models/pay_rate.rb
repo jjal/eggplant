@@ -1,5 +1,5 @@
 class PayRate < ActiveRecord::Base
-  attr_accessible :FTE, :hourly_rate, :id, :monthly_rate, :name, :type
+  attr_accessible :FTE, :hourly_rate, :id, :monthly_rate, :name, :type, :monthly
   has_many :employees, foreign_key: :payrate_id
   HOURLY_LEAVE_EARNED = 0.07
   TYPES = ["PermanentPayRate","CasualPayRate"]
