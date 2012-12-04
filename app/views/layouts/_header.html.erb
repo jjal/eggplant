@@ -1,14 +1,13 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-    <div class="container">
-      <%= link_to "Home", root_path, id: "logo" %>
-      Pay period: <%= current_pay_period.first.strftime("%d %b %Y") %> - <%= current_pay_period.last.strftime("%d %b %Y") %>
-      <nav>
-        <ul class="nav pull-right">
-        <li><%= link_to "Previous pay period", previous_pay_period_sessions_path, method: :post %></li>
-        <li><%= link_to "Next pay period", next_pay_period_sessions_path, method: :post %></li>
-        </ul>
-      </nav>
+    <div style="padding-left:20px;padding-right:20px">
+      <span class="pull-left">
+      <h4>Pay period: <%= current_pay_period.first.strftime("%d %b %Y") %> - <%= current_pay_period.last.strftime("%d %b %Y") %></h4>
+      </span>
+      <span class="btn-group pull-right">
+        <%= link_to "Previous pay period", previous_pay_period_sessions_path, method: :post, class: "btn" %>
+        <%= link_to "Next pay period", next_pay_period_sessions_path, method: :post, class: "btn" %>
+      </span>
     </div>
   </div>
 </header>
