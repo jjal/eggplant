@@ -1,8 +1,6 @@
 class PaychecksController < ApplicationController
   include PaychecksHelper
   
-	before_filter :ensure_paychecks_for_period, only: [:index]
-  
   # GET /paychecks
   # GET /paychecks.json
   def index  
@@ -10,10 +8,13 @@ class PaychecksController < ApplicationController
     @paychecks = @employees
       .collect { |e| e.current_paycheck(current_pay_period.last) }
       .find_all{ |p| 
-        !p.employee.pay_rate.monthly? or (p.employee.pay_rate.monthly? and current_pay_period.last == p.end_at) 
+        !p.nil? and (!p.employee.pay_rate.monthly? or (p.employee.pay_rate.monthly? and current_pay_period.last == p.end_at))
       }
     @total_payroll = 0
-    @paychecks.each { |p| @total_payroll += p.total_pay || 0 }
+    @paychecks.each { |p| 
+      p.recount
+      @total_payroll += p.total_pay || 0 
+    }
   end
 
   # GET /paychecks/1
@@ -86,17 +87,4 @@ class PaychecksController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  private
-    #make sure we have all the paychecks for the current period
-    def ensure_paychecks_for_period
-      @startDate = get_start_date_for(DateTime.now)
-      @endDate = get_end_date_for(DateTime.now)
-      @employees = Employee.all
-      @employees.each do |e|
-        pc = e.current_paycheck(current_pay_period.last)
-        pc.recount
-        pc.save!
-      end
-    end
 end

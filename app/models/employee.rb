@@ -33,7 +33,7 @@ class Employee < ActiveRecord::Base
     end_date = get_end_date_for(end_date, self.pay_rate.monthly?)
     
     paycheck = self.paychecks.find(:first, conditions: { start_at: start_date..end_date })
-    if(paycheck.nil?)
+    if(paycheck.nil? and self.created_at < end_date)
       paycheck = self.paychecks.build(start_at: start_date, end_at: end_date, payrate_id: self.payrate_id, fte: self.pay_rate.FTE)
       paycheck.save!
     end
