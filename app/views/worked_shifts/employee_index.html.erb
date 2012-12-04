@@ -1,6 +1,6 @@
 <% provide(:title, "Shifts for "+@employee.name) %>
 <% provide(:nav_tab, "worked_shifts") %>
-<h1>Shifts for <%=@employee.name%> <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
+<h1>Shifts for <%=@employee.name%> <%=current_pay_period(@employee).first.strftime("%d %b %Y")%> - <%=current_pay_period(@employee).last.strftime("%d %b %Y")%></h1>
 <%= form_tag({:controller => "worked_shifts", :action => "shifts"}, {:method => "post", :class => "form-horizontal"}) do %>
 <div class="pull-left"> 
 
