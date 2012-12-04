@@ -7,7 +7,9 @@ class PaychecksController < ApplicationController
   # GET /paychecks.json
   def index  
     @employees = Employee.all
-    
+    @paychecks = @employees.collect { |e| e.current_paycheck(current_pay_period.last) }
+    @total_payroll = 0
+    @paychecks.each { |p| @total_payroll += p.total_pay || 0 }
   end
 
   # GET /paychecks/1

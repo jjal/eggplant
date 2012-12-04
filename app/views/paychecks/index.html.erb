@@ -3,10 +3,11 @@
 <h1>Paychecks <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
 
 <ul class="payslip">
-<% @employees.each do |employee| %>
-  <%= render employee.current_paycheck(current_pay_period.last) %>
+<% @paychecks.each do |paycheck| %>
+  <%= render paycheck %>
 <% end %>
 </ul>
-
+<hr/>
+<h2>Total Payroll: <small>$ <%=number_with_precision @total_payroll , precision: 2%></small></h2>
 <%= button_to "Back to adjustments", adjustments_path, class: "btn btn-large", method: :get %> 
 <br />
