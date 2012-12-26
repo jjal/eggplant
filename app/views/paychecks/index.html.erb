@@ -8,6 +8,11 @@
 <% end %>
 </ul>
 <hr/>
-<h2>Total Payroll: <small>$ <%=number_with_precision @total_payroll , precision: 2%></small></h2>
+<div class="pull-right" style="text-align:right">
+<h2 style="text-align:right">Cafe Payroll: <small>$ <%=number_with_precision @total_cafe , precision: 2%></small></h2>
+<h2 style="text-align:right">Soksabike Payroll: <small>$ <%=number_with_precision @total_soksa , precision: 2%></small></h2>
+<h2 style="text-align:right">Kinyei Intl Payroll: <small>$ <%=number_with_precision @total_kinyei , precision: 2%></small></h2>
+<h2 style="text-align:right"><strong>Total Payroll: <small>$ <%=number_with_precision @total_payroll , precision: 2%></small></strong></h2>
+</div>
 <%= button_to "Back to adjustments", adjustments_path, class: "btn btn-large", method: :get %> 
 <br />

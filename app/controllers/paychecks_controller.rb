@@ -11,9 +11,15 @@ class PaychecksController < ApplicationController
         !p.nil? and (!p.employee.pay_rate.monthly? or (p.employee.pay_rate.monthly? and current_pay_period.last == p.end_at))
       }
     @total_payroll = 0
+    @total_soksa = 0
+    @total_cafe = 0
+    @total_kinyei = 0
     @paychecks.each { |p| 
       p.recount
       @total_payroll += p.total_pay || 0 
+      @total_cafe += p.pay_rate.cost_center_id == CostCenter::CAFE ? p.total_pay || 0 : 0
+      @total_soksa += p.pay_rate.cost_center_id == CostCenter::SOKSABIKE ? p.total_pay || 0 : 0
+      @total_kinyei += p.pay_rate.cost_center_id == CostCenter::KINYEI || p.pay_rate.cost_center_id.nil? ? p.total_pay || 0 : 0
     }
   end
 

@@ -15,5 +15,10 @@
 <%= f.label :FTE %>
 <%= f.text_field :FTE %>
 
-<%= f.label :monthly %>
-<%= f.check_box :monthly %>
+<%= f.label :monthly do %>
+  <%= f.check_box :monthly%> Pay monthly?
+<% end %>
+
+<%- f.label :cost_center %>
+<%= f.collection_select(:cost_center_id, CostCenter.all, :id, :name) %>
+
