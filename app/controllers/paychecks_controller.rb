@@ -4,7 +4,7 @@ class PaychecksController < ApplicationController
   # GET /paychecks
   # GET /paychecks.json
   def index  
-    @employees = Employee.all
+    @employees = Employee.find(:all, conditions: {status: "A"})
     @paychecks = @employees
       .collect { |e| e.current_paycheck(current_pay_period.last) }
       .find_all{ |p| 

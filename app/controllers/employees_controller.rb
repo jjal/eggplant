@@ -1,6 +1,10 @@
 class EmployeesController < ApplicationController
  def index
-		@employees = Employee.paginate(page: params[:page], order: :name)
+		@employees = Employee.paginate(
+        conditions: {status: "A"},
+        page: params[:page],
+        order: :name
+      )
 	end
 	
 	def show
@@ -36,8 +40,8 @@ class EmployeesController < ApplicationController
   end
 	 
 	def destroy
-    Employee.find(params[:id]).destroy
-    flash[:success] = "employee destroyed."
+    Employee.find(params[:id]).update_attribute(:status, "X")
+    flash[:success] = "Employee deleted."
     redirect_to employees_url
   end
   

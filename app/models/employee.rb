@@ -1,7 +1,7 @@
 class Employee < ActiveRecord::Base
   include PaychecksHelper
   
-  attr_accessible :name, :payrate_id
+  attr_accessible :name, :payrate_id, :status
   belongs_to :pay_rate, foreign_key: :payrate_id
   has_many :worked_shifts
   has_many :paychecks

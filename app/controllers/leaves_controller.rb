@@ -3,7 +3,7 @@ class LeavesController < ApplicationController
   # GET /leaves.json
   def index
     if(params[:employee_id].nil?)
-      @employees = Employee.all
+      @employees = Employee.find(:all, conditions: {status: "A"})
     else
       @employee = Employee.find(params[:employee_id])
       render 'employee_index'
