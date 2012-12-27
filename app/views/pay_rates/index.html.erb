@@ -29,8 +29,9 @@
   </tr>
 <% end %>
 </table>
+<p>
 <%= link_to "Show/hide unused pay rates", "#", onclick: "toggleUnusedPayRates()", class: "btn btn-medium" %>
-<br/>
+</p>
 <%= button_to "New pay rate", new_pay_rate_url, method: :get, class: "btn btn-large btn-primary" %>
 <br />
 
