@@ -16,7 +16,7 @@ class PaychecksController < ApplicationController
     @total_kinyei = 0
     @paychecks.each { |p| 
       p.recount
-      @total_payroll += p.total_pay || 0 
+      @total_payroll += p.get_total_pay || 0 
       @total_cafe += p.pay_rate.cost_center_id == CostCenter::CAFE ? p.get_total_pay || 0 : 0
       @total_soksa += p.pay_rate.cost_center_id == CostCenter::SOKSABIKE ? p.get_total_pay || 0 : 0
       @total_kinyei += p.pay_rate.cost_center_id == CostCenter::KINYEI || p.pay_rate.cost_center_id.nil? ? p.get_total_pay || 0 : 0

@@ -33,7 +33,7 @@ class Paycheck < ActiveRecord::Base
   end
   
   def get_total_pay
-    self.total_adjustments_pay || 0 + self.total_pay || 0
+    return (self.total_adjustments_pay || 0) + (self.total_pay || 0)
   end
   
   def recount
