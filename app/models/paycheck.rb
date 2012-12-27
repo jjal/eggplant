@@ -32,6 +32,10 @@ class Paycheck < ActiveRecord::Base
     employee.get_old_leave(self.start_at) - employee.get_leave_total_for(self.start_at, self.end_at) + self.pay_rate.calculate_leave(self)
   end
   
+  def get_total_pay
+    self.total_adjustments_pay || 0 + self.total_pay || 0
+  end
+  
   def recount
     self.pay_rate = employee.pay_rate
     self.fte = pay_rate.FTE

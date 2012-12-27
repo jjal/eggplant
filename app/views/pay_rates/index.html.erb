@@ -16,7 +16,7 @@
   </tr>
 
 <% @pay_rates.each do |pay_rate| %>
-  <tr>
+  <tr class="<%= pay_rate.employees.count > 0 ? "pay_rate_used" : "pay_rate_unused" %>">
     <td><%= pay_rate.id %></td>
     <td><%= pay_rate.name %></td>
     <td><%= pay_rate.type %></td>
@@ -29,5 +29,17 @@
   </tr>
 <% end %>
 </table>
+<%= link_to "Show/hide unused pay rates", "#", onclick: "toggleUnusedPayRates()", class: "btn btn-medium" %>
+<br/>
 <%= button_to "New pay rate", new_pay_rate_url, method: :get, class: "btn btn-large btn-primary" %>
 <br />
+
+<script>
+  $(document).ready(function() {
+    $(".pay_rate_unused").hide();
+  });
+  function toggleUnusedPayRates()
+  {
+    $(".pay_rate_unused").toggle();
+  }
+</script>
