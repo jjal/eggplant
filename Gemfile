@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails'                    
+gem 'rails',   '3.2.11'        
+gem 'sass-rails', '~> 3.2'         
 gem 'bootstrap-sass'
 gem 'bcrypt-ruby',              '3.0.1'
 gem 'bootstrap-will_paginate',  '0.0.6'
@@ -46,7 +47,6 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',             '3.2.4'
   gem 'coffee-rails',           '3.2.2'
   gem 'uglifier',               '1.2.3'
   gem 'compass-rails'

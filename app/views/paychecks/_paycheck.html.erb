@@ -11,5 +11,5 @@
     <li class="clearfix"><div class="payslip fieldtitle">Leave Taken:</div><div class="payslip contents"><%= number_with_precision paycheck.total_leave_taken, precision: 2 %></div></li>
     <li class="clearfix"><div class="payslip fieldtitle">Leave Balance:</div><div class="payslip contents"><%= number_with_precision paycheck.total_leave_balance, precision: 2 %></div></li>
   </ul>
-  
+  <%= link_to "Refresh from current pay rate", paycheck_path(paycheck), method: :delete, confirm: "This will delete and re-create the paycheck if there is one for this pay period. Are you sure?", class: "btn btn-medium" %>
 </li>
