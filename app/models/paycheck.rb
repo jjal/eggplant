@@ -47,6 +47,7 @@ class Paycheck < ActiveRecord::Base
     self.total_leave_taken = self.get_leave_taken_total
     self.total_leave_balance = self.get_leave_balance
     self.total_pay = self.get_pay
+    self.save
   end
   
   def get_previous_paycheck

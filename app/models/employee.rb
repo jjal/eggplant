@@ -24,7 +24,7 @@ class Employee < ActiveRecord::Base
   end
   
   def get_old_leave (current_date)
-    pc = self.paychecks.find(:first, conditions: ["start_at < ?",current_date] , order: "start_at DESC", select: "total_leave_balance")
+    pc = self.paychecks.find(:first, conditions: ["end_at < ?",current_date] , order: "start_at DESC", select: "total_leave_balance")
     return pc.nil? ? 0 : pc.total_leave_balance || 0
   end
   
