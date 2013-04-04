@@ -37,7 +37,6 @@ class Paycheck < ActiveRecord::Base
   end
   
   def recount
-    self.pay_rate = employee.pay_rate
     self.fte = pay_rate.FTE
     
     self.total_adjustments_pay = self.get_adjustments

@@ -8,14 +8,17 @@ class PaychecksController < ApplicationController
     @paychecks = @employees
       .collect { |e| e.current_paycheck(current_pay_period.last) }
       .find_all{ |p| 
-        !p.nil? and (!p.employee.pay_rate.monthly? or (p.employee.pay_rate.monthly? and current_pay_period.last == p.end_at))
+        !p.nil? and !p.pay_rate.nil? and (!p.pay_rate.monthly? or (p.pay_rate.monthly? and current_pay_period.last == p.end_at))
       }
     @total_payroll = 0
     @total_soksa = 0
     @total_cafe = 0
     @total_kinyei = 0
     @paychecks.each { |p| 
-      p.recount
+      #if it's the current paycheck, consider recounting its summary fields
+      if(current_pay_period.last == p.end_at)
+        p.recount  
+      end
       @total_payroll += p.get_total_pay || 0 
       @total_cafe += p.pay_rate.cost_center_id == CostCenter::CAFE ? p.get_total_pay || 0 : 0
       @total_soksa += p.pay_rate.cost_center_id == CostCenter::SOKSABIKE ? p.get_total_pay || 0 : 0

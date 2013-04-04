@@ -35,6 +35,7 @@ class Employee < ActiveRecord::Base
     paycheck = self.paychecks.find(:first, conditions: { start_at: start_date..end_date })
     if(paycheck.nil? and self.created_at < end_date)
       paycheck = self.paychecks.build(start_at: start_date, end_at: end_date, payrate_id: self.payrate_id, fte: self.pay_rate.FTE)
+      paycheck.recount
       paycheck.save!
     end
     return paycheck
