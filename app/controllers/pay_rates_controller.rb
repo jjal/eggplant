@@ -44,11 +44,10 @@ class PayRatesController < ApplicationController
 
     respond_to do |format|
       if @pay_rate.save
-        format.html { redirect_to @pay_rate, notice: 'Pay rate was successfully created.' }
-        format.json { render json: @pay_rate, status: :created, location: @pay_rate }
+        flash[:success] = 'Pay rate was successfully created.'
+        format.html { redirect_to pay_rates_url }
       else
         format.html { render action: "new" }
-        format.json { render json: @pay_rate.errors, status: :unprocessable_entity }
       end
     end
   end

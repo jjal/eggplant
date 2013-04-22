@@ -7,6 +7,7 @@
     <%= form_for(@employee) do |f| %>
       <%= render "fields", f: f %>
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+      <%= link_to "Delete",  employee_path(@employee), method: :delete, class: "btn btn-large btn-danger", confirm: "Are you sure you want to delete this employee?" %>
     <% end %>
   </div>
 </div>

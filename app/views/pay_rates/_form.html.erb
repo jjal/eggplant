@@ -10,8 +10,8 @@
       </ul>
     </div>
   <% end %>
-
+  <%= render "fields", f: f %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-large btn-primary" %>
   </div>
 <% end %>

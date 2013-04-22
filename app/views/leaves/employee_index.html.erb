@@ -1,6 +1,6 @@
 <% provide(:title, "Leave hours for pay period "+current_pay_period.first.strftime("%d %b %Y")+" to "+current_pay_period.last.strftime("%d %b %Y")) %>
 <% provide(:nav_tab, "leave") %>
-<h1><%= @employee.name %>'s leave <%=current_pay_period.first.strftime("%d %b %Y")%> - <%=current_pay_period.last.strftime("%d %b %Y")%></h1>
+<h1><%= @employee.name %>'s leave <%=current_pay_period(@employee).first.strftime("%d %b %Y")%> - <%=current_pay_period(@employee).last.strftime("%d %b %Y")%></h1>
 
 
 <table class="table table-striped table-condensed">

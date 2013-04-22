@@ -11,7 +11,7 @@
   </tr>
 <tbody>
 <% @employees.each do |employee| 
-      paycheck = employee.current_paycheck
+      paycheck = employee.current_paycheck(current_pay_period.last)
 %>
   <tr>
     <td><%= employee.name %></td>

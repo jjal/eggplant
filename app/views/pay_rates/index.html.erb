@@ -3,22 +3,44 @@
 
 <table  class="table table-striped table-condensed">
   <tr>
+    <th>ID</th>
     <th>Name</th>
     <th>Type</th>
     <th>Hourly Rate</th>
     <th>Monthly Rate</th>
     <th>FTE</th>
+    <th>Monthly?</th>
+    <th>Employees</th>
+    <th>Added</th>
+    <th></th>
   </tr>
 
 <% @pay_rates.each do |pay_rate| %>
-  <tr>
+  <tr class="<%= pay_rate.employees.count > 0 ? "pay_rate_used" : "pay_rate_unused" %>">
+    <td><%= pay_rate.id %></td>
     <td><%= pay_rate.name %></td>
     <td><%= pay_rate.type %></td>
     <td><%= pay_rate.hourly_rate %></td>
     <td><%= pay_rate.monthly_rate %></td>
-    <td><%= pay_rate.FTE %></td>
+    <td><%= "%.2f"%(pay_rate.FTE||0) %></td>
+    <td><%= pay_rate.monthly ? "X" : "" %></td>
+    <td><%= pay_rate.employees.count %></td>
+    <td><%= pay_rate.created_at.strftime("%d %b %Y") %></td>
   </tr>
 <% end %>
 </table>
-
+<p>
+<%= link_to "Show/hide unused pay rates", "#", onclick: "toggleUnusedPayRates()", class: "btn btn-medium" %>
+</p>
+<%= button_to "New pay rate", new_pay_rate_url, method: :get, class: "btn btn-large btn-primary" %>
 <br />
+
+<script>
+  $(document).ready(function() {
+    $(".pay_rate_unused").hide();
+  });
+  function toggleUnusedPayRates()
+  {
+    $(".pay_rate_unused").toggle();
+  }
+</script>

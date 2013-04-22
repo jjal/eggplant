@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121030093042) do
+ActiveRecord::Schema.define(:version => 20121226090926) do
 
   create_table "adjustments", :force => true do |t|
     t.decimal  "pay"
@@ -24,11 +24,18 @@ ActiveRecord::Schema.define(:version => 20121030093042) do
     t.string   "note"
   end
 
-  create_table "employees", :force => true do |t|
+  create_table "cost_centers", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "employees", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.integer  "payrate_id"
+    t.string   "status",     :default => "A"
   end
 
   create_table "leaves", :force => true do |t|
@@ -81,8 +88,10 @@ ActiveRecord::Schema.define(:version => 20121030093042) do
     t.decimal  "hourly_rate"
     t.decimal  "monthly_rate"
     t.decimal  "FTE"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.boolean  "monthly"
+    t.integer  "cost_center_id"
   end
 
   create_table "paychecks", :force => true do |t|

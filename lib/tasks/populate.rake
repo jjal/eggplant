@@ -1,9 +1,44 @@
 namespace :db do
   desc "Fill database with basic data"
+  
   task populate: :environment do
     make_pay_rates
     make_employees
     make_starter_paychecks
+  end
+  
+  task add_monthly_settings: :environment do
+    [1, 19].each do |id|
+      pr = PayRate.find(id)
+      pr.monthly = true
+      pr.save!
+    end
+  end
+  
+  task add_leave_balance: :environment do
+    {
+      "Oeun Sean"=>	21.16,
+      "Long Sakana"=>	71.58, 
+      "Kchao Sopheap"=>	26.41, 
+      "Leng Chhouert (cafe)"=>	46.90, 
+      "Samnang"=>	30.85, 
+      "Sophy"=>	22.50, 
+      "Chan Chaiya"=>	10.21, 
+      "Prom Bopha"=>	6.08, 
+      "Vatha (cafe)"=>	11.55, 
+      "Phalla"=>	-2.96,		
+      "Khou Sopheap"=>	3.50,
+      "Yon Chenda"=>	2.00,
+      "Leng Chhouert"=>	1.50,
+      "Vatha"=>	1.50
+    }.each do |n, b|
+      
+      employee = Employee.find(:first, conditions: {name: n})
+      pc = employee.paychecks.find(:first, order: "start_at DESC", conditions: ["start_at < ?", DateTime.parse("2012-11-01")]) || employee.paychecks.build(start_at: DateTime.parse("2012-01-01"), end_at: DateTime.parse("2012-01-01"))
+      puts "setting #{employee.name} #{pc.start_at}: #{b}"
+      pc.total_leave_balance = b
+      pc.save!
+    end
   end
 end
 
@@ -32,6 +67,7 @@ end
 def make_employees
   #min_rate = PayRate.minimum(:id)
   #max_rate = PayRate.maximum(:id)
+
   get_employees.each do |n,p|
     employee = Employee.create!(name: n, payrate_id: p[:rate])
   end
@@ -46,8 +82,9 @@ def make_pay_rates
   PayRate.create!(id: PayRate::C_OPERATIONS_MGR, name:"Cafe operations manager candidate", type:"PermanentPayRate", monthly_rate: 130, FTE: 0.5) #chenda
   PayRate.create!(id: PayRate::C_SUPERVISOR, name:"Cafe supervisor", type:"PermanentPayRate", monthly_rate: 100, FTE: 1.0) #sean
   PayRate.create!(id: PayRate::C_KITCHEN_SUPERVISOR, name:"Cafe kitchen supervisor", type:"PermanentPayRate", monthly_rate: 80, FTE: 1.0) #sakana
+  PayRate.create!(id: PayRate::C_STAFF_PERMANENT, name:"Normal cafe permanent", type:"PermanentPayRate", monthly_rate: 60, FTE: 0.5) #kchao sopheap
   
-  PayRate.create!(id: PayRate::C_STAFF_CASUAL, name:"Normal cafe casual", type:"CasualPayRate", hourly_rate: 0.31) #kchao sopheap
+  PayRate.create!(id: PayRate::C_STAFF_CASUAL, name:"Normal cafe casual", type:"CasualPayRate", hourly_rate: 0.31) 
   PayRate.create!(id: PayRate::C_STAFF_CASUAL_ENTRY, name:"Entry cafe casual", type:"CasualPayRate", hourly_rate: 0.26) #samnang, sophy
   
   PayRate.create!(id: PayRate::C_STAFF_PERMANENT_ENTRY, name:"Entry level cafe contract", type:"PermanentPayRate", monthly_rate: 50, FTE: 0.53) #bopha, chaiya

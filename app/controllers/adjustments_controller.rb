@@ -6,7 +6,7 @@ class AdjustmentsController < ApplicationController
       @paycheck = Paycheck.find(params[:paycheck_id])
       render 'paycheck_index'
     else
-      @employees = Employee.all
+      @employees = Employee.find(:all, conditions: {status: "A"})
     end
   end
 

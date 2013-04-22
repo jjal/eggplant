@@ -4,7 +4,7 @@
 <%= f.text_field :name %>
 
 <%= f.label :type %>
-<%= f.text_field :type %>
+<%= f.select :type, PayRate::TYPES %>
 
 <%= f.label :hourly_rate %>
 <%= f.text_field :hourly_rate %>
@@ -14,3 +14,11 @@
 
 <%= f.label :FTE %>
 <%= f.text_field :FTE %>
+
+<%= f.label :monthly do %>
+  <%= f.check_box :monthly%> Pay monthly?
+<% end %>
+
+<%- f.label :cost_center %>
+<%= f.collection_select(:cost_center_id, CostCenter.all, :id, :name) %>
+
