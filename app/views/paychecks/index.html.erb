@@ -15,4 +15,5 @@
 <h2 style="text-align:right"><strong>Total Payroll: <small>$ <%=number_with_precision @total_payroll , precision: 2%></small></strong></h2>
 </div>
 <%= button_to "Back to adjustments", adjustments_path, class: "btn btn-large", method: :get %> 
+<%= link_to "Export to Excel", url_for(:format => "xls") %>
 <br />

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <% @paychecks.each do |p| %>
+      <%= render partial: "/paychecks/paycheck", paycheck: p %>
+    <% end %>
+    
+  </body>
+</html>

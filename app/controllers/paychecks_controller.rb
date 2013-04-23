@@ -24,6 +24,18 @@ class PaychecksController < ApplicationController
       @total_soksa += p.pay_rate.cost_center_id == CostCenter::SOKSABIKE ? p.get_total_pay || 0 : 0
       @total_kinyei += p.pay_rate.cost_center_id == CostCenter::KINYEI || p.pay_rate.cost_center_id.nil? ? p.get_total_pay || 0 : 0
     }
+    respond_to do |format|
+      format.html
+      format.xls do
+        render :xls => @paychecks,
+                     :columns => [ {:employee=> [:name]}, {:pay_rate => [:name, :FTE]}, :start_at, :end_at, :total_hours, :total_adjustments_pay, :total_leave_taken, :total_leave_balance, :total_pay  ],
+                     :headers => %w[ Name Position FTE Start End Hours Adjustments Leave Balance Pay ]
+      end
+    end
+  end
+  
+  def mail 
+    PayrollMailer.monthly_report(@paychecks).deliver
   end
 
   # GET /paychecks/1
