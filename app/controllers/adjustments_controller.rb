@@ -1,4 +1,5 @@
 class AdjustmentsController < ApplicationController
+  include PaychecksHelper
   # GET /adjustments
   # GET /adjustments.json
   def index
@@ -6,7 +7,7 @@ class AdjustmentsController < ApplicationController
       @paycheck = Paycheck.find(params[:paycheck_id])
       render 'paycheck_index'
     else
-      @employees = Employee.find(:all, conditions: {status: "A"})
+      @employees = Employee.find(:all, conditions: {status: "A"}).select { |e| !e.current_paycheck(current_pay_period.last).nil? }
     end
   end
 
