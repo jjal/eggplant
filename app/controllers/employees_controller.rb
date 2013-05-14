@@ -40,7 +40,7 @@ class EmployeesController < ApplicationController
   end
 	 
 	def destroy
-    Employee.find(params[:id]).update_attribute(:status, "X")
+    Employee.find(params[:id]).update_attributes(status: "X", datedeactivated: DateTime.now)
     flash[:success] = "Employee deleted."
     redirect_to employees_url
   end
