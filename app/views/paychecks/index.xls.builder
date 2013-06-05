@@ -21,12 +21,12 @@ excel_document(xml) do
             xml.Cell { xml.Data paycheck.employee.name, 'ss:Type' => 'String' }
             xml.Cell { xml.Data paycheck.pay_rate.name, 'ss:Type' => 'String' }
             xml.Cell { xml.Data paycheck.start_at.strftime("%d %b %Y") + " - "+ paycheck.end_at.strftime("%d %b %Y"), 'ss:Type' => 'String' }
-            xml.Cell { xml.Data number_with_precision paycheck.total_pay, precision: 2, 'ss:Type' => 'Number' }
+            xml.Cell { xml.Data paycheck.total_pay, 'ss:Type' => 'Number' }
             xml.Cell { xml.Data paycheck.total_adjustments_pay, 'ss:Type' => 'Number' }
             xml.Cell { xml.Data paycheck.total_hours, 'ss:Type' => 'Number' }
-            xml.Cell { xml.Data number_with_precision paycheck.total_leave, precision: 2, 'ss:Type' => 'Number' }
-            xml.Cell { xml.Data number_with_precision paycheck.total_leave_taken, precision: 2, 'ss:Type' => 'Number' }
-            xml.Cell { xml.Data number_with_precision paycheck.total_leave_balance, precision: 2, 'ss:Type' => 'Number' }
+            xml.Cell { xml.Data paycheck.total_leave, 'ss:Type' => 'Number' }
+            xml.Cell { xml.Data paycheck.total_leave_taken, 'ss:Type' => 'Number' }
+            xml.Cell { xml.Data paycheck.total_leave_balance, 'ss:Type' => 'Number' }
           end
         end
 
