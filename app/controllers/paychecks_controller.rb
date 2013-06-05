@@ -4,33 +4,36 @@ class PaychecksController < ApplicationController
   # GET /paychecks
   # GET /paychecks.json
   def index  
-    @employees = Employee.find(:all, conditions: ["datedeactivated is null or datedeactivated > ?",current_pay_period.last])
-    @paychecks = @employees
-      .collect { |e| e.current_paycheck(current_pay_period.last) }
-      .find_all{ |p| 
-        !p.nil? and !p.pay_rate.nil? and (!p.pay_rate.monthly? or (p.pay_rate.monthly? and current_pay_period.last == p.end_at))
-      }
-    @total_payroll = 0
-    @total_soksa = 0
-    @total_cafe = 0
-    @total_kinyei = 0
-    @paychecks.each { |p| 
-      #if it's the current paycheck, consider recounting its summary fields
-      if(current_pay_period.last == p.end_at)
-        p.recount  
-      end
-      @total_payroll += p.get_total_pay || 0 
-      @total_cafe += p.pay_rate.cost_center_id == CostCenter::CAFE ? p.get_total_pay || 0 : 0
-      @total_soksa += p.pay_rate.cost_center_id == CostCenter::SOKSABIKE ? p.get_total_pay || 0 : 0
-      @total_kinyei += p.pay_rate.cost_center_id == CostCenter::KINYEI || p.pay_rate.cost_center_id.nil? ? p.get_total_pay || 0 : 0
-    }
+    @paychecks = Paycheck.for_period(current_pay_period)
+    
+    #if it's the current paycheck, consider recounting its summary fields
+    @paychecks.each { |p| p.recount if current_pay_period.last == p.end_at }
+
+    @stats = Paycheck.get_stats_for(@paychecks)
+
     respond_to do |format|
       format.html
       format.xls do
-        render :xls => @paychecks,
-                     :columns => [ {:employee=> [:name]}, {:pay_rate => [:name, :FTE]}, :start_at, :end_at, :total_hours, :total_adjustments_pay, :total_leave_taken, :total_leave_balance, :total_pay  ],
-                     :headers => %w[ Name Position FTE Start End Hours Adjustments Leave Balance Pay ]
+        @payrolls = {}
+        period = current_pay_period
+        i = 0
+        #limit to 100 to prevent massive downloads
+        while(period.first >= Paycheck.find(:all, order: :start_at).first.start_at && (i <= 100)) do
+          paychecks = Paycheck.for_period(period)
+          stats = Paycheck.get_stats_for(paychecks)
+          @payrolls[period] = {
+            paychecks: paychecks,
+            stats: stats
+          }
+          i += 1
+          period = get_pay_period_for(period.first - 1.day)
+        end
       end
+      #do
+      #  render :xls => @paychecks,
+      #               :columns => [ {:employee=> [:name]}, {:pay_rate => [:name, :FTE]}, :start_at, :end_at, :total_hours, :total_adjustments_pay, :total_leave_taken, :total_leave_balance, :total_pay  ],
+      #               :headers => %w[ Name Position FTE Start End Hours Adjustments Leave Balance Pay ]
+      #end
     end
   end
   

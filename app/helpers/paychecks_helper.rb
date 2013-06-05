@@ -23,6 +23,10 @@ module PaychecksHelper
   def get_pay_period_for(t)
     return get_start_date_for(t)..get_end_date_for(t)
   end
+
+  def current_pay_period=(daterange)
+    session[:current_pay_period] = daterange
+  end
   
   def current_pay_period(employee=nil)
     

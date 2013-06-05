@@ -9,7 +9,7 @@ gem 'decent_exposure',          '2.0.0.rc1'
 gem 'formtastic'
 gem 'haml',                     '~> 3.2.0.alpha.10'
 gem 'will_paginate',            '3.0.3'
-gem 'to_xls', '~> 1.0.0'
+#gem 'to_xls', '~> 1.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

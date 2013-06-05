@@ -1,9 +1,31 @@
 class Paycheck < ActiveRecord::Base
+  include PaychecksHelper
   attr_accessible :delivered_at, :employee_id, :end_at, :id, :payrate_id, :prepared_at, :start_at, :status, :user_id, :fte
   belongs_to :employee
   belongs_to :pay_rate, foreign_key: :payrate_id
   has_many :adjustments
   
+  def self.for_period(pay_period)
+    employees = Employee.find(:all, conditions: ["datedeactivated is null or datedeactivated > ?",pay_period.last])
+    paychecks = employees
+      .collect { |e| e.current_paycheck(pay_period.last) }
+      .find_all{ |p| 
+        !p.nil? and !p.pay_rate.nil? and (!p.pay_rate.monthly? or (p.pay_rate.monthly? and pay_period.last == p.end_at))
+      }
+    return paychecks
+  end
+
+  def self.get_stats_for(paychecks)
+    total_payroll, total_cafe, total_soksa, total_kinyei = 0,0,0,0
+    paychecks.each { |p| 
+      total_payroll += p.get_total_pay || 0 
+      total_cafe += p.pay_rate.cost_center_id == CostCenter::CAFE ? p.get_total_pay || 0 : 0
+      total_soksa += p.pay_rate.cost_center_id == CostCenter::SOKSABIKE ? p.get_total_pay || 0 : 0
+      total_kinyei += p.pay_rate.cost_center_id == CostCenter::KINYEI || p.pay_rate.cost_center_id.nil? ? p.get_total_pay || 0 : 0
+    }
+    return { total_cafe: total_cafe, total_kinyei: total_kinyei, total_soksa: total_soksa, total_payroll: total_payroll }
+  end
+
   def get_pay
     self.pay_rate.calculate_pay(self)
   end
